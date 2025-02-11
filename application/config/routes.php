@@ -1,0 +1,169 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+$route['default_controller'] = 'Page';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
+$route['logout'] = 'Login/logout';
+
+$route['Administrator'] = 'Administrator/Page';
+$route['module/(:any)'] = 'Administrator/Page/module/$1';
+$route['brachAccess/(:any)'] = 'Administrator/Login/brach_access/$1';
+$route['getBrachAccess'] = 'Administrator/Login/branch_access_main_admin';
+
+$route['area'] = 'Administrator/Page/area';
+$route['insertarea'] = 'Administrator/Page/insert_area';
+$route['areadelete'] = 'Administrator/Page/areadelete';
+$route['areaedit/(:any)'] = 'Administrator/Page/areaedit/$1';
+$route['areaupdate'] = 'Administrator/Page/areaupdate';
+$route['get_districts'] = 'Administrator/Page/getDistricts';
+
+//========================================= Client Route ======================================
+$route['customer'] = 'Administrator/Customer';
+$route['add_customer'] = 'Administrator/Customer/addCustomer';
+$route['update_customer'] = 'Administrator/Customer/updateCustomer';
+$route['assign_customer'] = 'Administrator/Customer/assignCustomer';
+$route['delete_customer'] = 'Administrator/Customer/deleteCustomer';
+$route['get_customers'] = 'Administrator/Customer/getCustomers';
+$route['download_customer/(:any)/(:any)'] = 'Administrator/Customer/downloadxlxCustomer/$1/$2';
+
+//====================================== Common Route ======================================
+// zone route
+$route['zone'] = 'Administrator/Zone';
+$route['get_zone'] = 'Administrator/Zone/getZone';
+$route['add_zone'] = 'Administrator/Zone/addZone';
+$route['update_zone'] = 'Administrator/Zone/updateZone';
+$route['delete_zone'] = 'Administrator/Zone/deleteZone';
+// property_category route
+$route['property_category'] = 'Administrator/PropertyCategory';
+$route['get_property_category'] = 'Administrator/PropertyCategory/getPropertyCategory';
+$route['add_property_category'] = 'Administrator/PropertyCategory/addPropertyCategory';
+$route['update_property_category'] = 'Administrator/PropertyCategory/updatePropertyCategory';
+$route['delete_property_category'] = 'Administrator/PropertyCategory/deletePropertyCategory';
+// lift
+$route['floor']        = 'Administrator/Floor';
+$route['add_floor'] = 'Administrator/Floor/addFloor';
+$route['update_floor'] = 'Administrator/Floor/updateFloor';
+$route['delete_floor'] = 'Administrator/Floor/deleteFloor';
+$route['get_floor']    = 'Administrator/Floor/getFloor';
+// lift
+$route['lift']        = 'Administrator/Lift';
+$route['add_lift'] = 'Administrator/Lift/addLift';
+$route['update_lift'] = 'Administrator/Lift/updateLift';
+$route['delete_lift'] = 'Administrator/Lift/deleteLift';
+$route['get_lift']    = 'Administrator/Lift/getLift';
+// generator
+$route['generator']        = 'Administrator/PropertyGenerator';
+$route['add_generator'] = 'Administrator/PropertyGenerator/addGenerator';
+$route['update_generator'] = 'Administrator/PropertyGenerator/updateGenerator';
+$route['delete_generator'] = 'Administrator/PropertyGenerator/deleteGenerator';
+$route['get_generator']    = 'Administrator/PropertyGenerator/getGenerator';
+// gas
+$route['gas']        = 'Administrator/Gas';
+$route['add_gas'] = 'Administrator/Gas/addGas';
+$route['update_gas'] = 'Administrator/Gas/updateGas';
+$route['delete_gas'] = 'Administrator/Gas/deleteGas';
+$route['get_gas']    = 'Administrator/Gas/getGas';
+
+
+// ===================================== Property Management =========================================
+$route['property_entry'] = 'Administrator/Property';
+$route['get_property'] = 'Administrator/Property/getProperty';
+$route['add_property'] = 'Administrator/Property/addProperty';
+$route['update_property'] = 'Administrator/Property/updateProperty';
+$route['delete_property'] = 'Administrator/Property/deleteProperty';
+$route['property_list'] = 'Administrator/Property/propertyList';
+$route['download_property/(:any)/(:any)'] = 'Administrator/Property/downloadxlxProperty/$1/$2';
+
+//========================================== User Management ==========================================
+$route['user'] = 'Administrator/User_management';
+$route['get_users'] = 'Administrator/User_management/getUsers';
+$route['get_all_users'] = 'Administrator/User_management/getAllUsers';
+$route['userInsert'] = 'Administrator/User_management/user_Insert';
+$route['userUpdate'] = 'Administrator/User_management/userupdate';
+$route['userEdit/(:any)'] = 'Administrator/User_management/edit/$1';
+$route['userDeactive/(:any)'] = 'Administrator/User_management/userDeactive/$1';
+$route['userActive/(:any)'] = 'Administrator/User_management/userActive/$1';
+$route['access/(:any)'] = 'Administrator/User_management/user_access/$1';
+$route['get_user_access'] = 'Administrator/User_management/getUserAccess';
+$route['profile'] = 'Administrator/User_management/profile';
+$route['password_change'] = 'Administrator/User_management/password_change';
+$route['define_access/(:any)'] = 'Administrator/User_management/define_access/$1';
+$route['add_user_access'] = 'Administrator/User_management/addUserAccess';
+$route['upload_user_image'] = 'Administrator/User_management/uploadUserImage';
+$route['user_activity'] = 'Administrator/User_management/userActivity';
+$route['get_user_activity'] = 'Administrator/User_management/getUserActivity';
+$route['delete_user_activity'] = 'Administrator/User_management/deleteUserActivity';
+
+$route['brunch'] = 'Administrator/Page/brunch';
+$route['add_branch'] = 'Administrator/Page/addBranch';
+$route['update_branch'] = 'Administrator/Page/updateBranch';
+$route['brunchEdit'] = 'Administrator/Page/brunch_edit';
+$route['brunchUpdate'] = 'Administrator/Page/brunch_update';
+$route['brunchDelete'] = 'Administrator/Page/brunch_delete';
+$route['get_branches'] = 'Administrator/Page/getBranches';
+$route['get_current_branch'] = 'Administrator/Page/getCurrentBranch';
+$route['change_branch_status'] = 'Administrator/Page/changeBranchStatus';
+
+$route['companyProfile'] = 'Administrator/Page/company_profile';
+$route['company_profile_Update'] = 'Administrator/Page/company_profile_Update';
+$route['company_profile_insert'] = 'Administrator/Page/company_profile_insert';
+$route['get_company_profile'] = 'Administrator/Page/getCompanyProfile';
+
+//========================================== Employee Management==========================================
+$route['employee'] = 'Administrator/employee';
+$route['get_employees'] = 'Administrator/Employee/getEmployees';
+$route['employeeInsert'] = 'Administrator/Employee/employee_insert/';
+$route['emplists/(:any)'] = 'Administrator/Employee/emplists/$1';
+$route['employeeEdit/(:any)'] = 'Administrator/Employee/employee_edit/$1';
+$route['employeeUpdate'] = 'Administrator/Employee/employee_Update';
+$route['employeeDelete'] = 'Administrator/Employee/employee_Delete';
+$route['employeeActive'] = 'Administrator/Employee/active';
+
+//salary Payment
+$route['salary_payment']                = 'Administrator/Employee/employeePayment';
+$route['check_payment_month']           = 'Administrator/Employee/checkPaymentMonth';
+$route['get_payments']                  = 'Administrator/Employee/getPayments';
+$route['get_salary_details']            = 'Administrator/Employee/getSalaryDetails';
+$route['add_salary_payment']            = 'Administrator/Employee/saveSalaryPayment';
+$route['update_salary_payment']         = 'Administrator/Employee/updateSalaryPayment';
+$route['salary_payment_report']         = 'Administrator/Employee/employeePaymentReport';
+$route['delete_payment']                = 'Administrator/Employee/deletePayment';
+
+$route['designation']            = 'Administrator/Employee/designation/';
+$route['insertDesignation']      = 'Administrator/Employee/insert_designation';
+$route['designationedit/(:any)'] = 'Administrator/Employee/designationedit/$1';
+$route['designationUpdate']      = 'Administrator/Employee/designationupdate/';
+$route['designationdelete']      = 'Administrator/Employee/designationdelete';
+
+$route['depertment']            = 'Administrator/Employee/depertment';
+$route['insertDepertment']      = 'Administrator/Employee/insert_depertment';
+$route['depertmentdelete']      = 'Administrator/Employee/depertmentdelete/';
+$route['depertmentedit/(:any)'] = 'Administrator/Employee/depertmentedit/$1';
+$route['depertmentupdate']      = 'Administrator/Employee/depertmentupdate';
+
+$route['month']            = 'Administrator/Employee/month';
+$route['insertMonth']      = 'Administrator/Employee/insert_month';
+$route['editMonth/(:any)'] = 'Administrator/Employee/editMonth/$1';
+$route['updateMonth']      = 'Administrator/Employee/updateMonth';
+$route['get_months']       = 'Administrator/Employee/getMonths';
+
+// Graph
+$route['graph'] = 'Administrator/Graph/graph';
+$route['get_graph_data'] = 'Administrator/Graph/getGraphData';
+
+// SMS
+$route['sms'] = 'Administrator/SMS';
+$route['send_sms'] = 'Administrator/SMS/sendSms';
+$route['send_bulk_sms'] = 'Administrator/SMS/sendBulkSms';
+$route['sms_settings'] = 'Administrator/SMS/smsSettings';
+$route['get_sms_settings'] = 'Administrator/SMS/getSmsSettings';
+$route['save_sms_settings'] = 'Administrator/SMS/saveSmsSettings';
+
+$route['user_login'] = 'Login/userLogin';
+$route['get_otp'] = 'Administrator/Page/getOtp';
+$route['update_otp'] = 'Administrator/Page/UpdateOtp';
+$route['otp_page'] = 'Administrator/Page/OtpPage';
+$route['check_otp'] = 'Administrator/Page/editdeleteAccess';
+$route['database_backup'] = 'Administrator/Page/databaseBackup';
