@@ -65,6 +65,66 @@ $route['add_gas'] = 'Administrator/Gas/addGas';
 $route['update_gas'] = 'Administrator/Gas/updateGas';
 $route['delete_gas'] = 'Administrator/Gas/deleteGas';
 $route['get_gas']    = 'Administrator/Gas/getGas';
+// sqft
+$route['sqft']        = 'Administrator/Sqft';
+$route['add_sqft'] = 'Administrator/Sqft/addSqft';
+$route['update_sqft'] = 'Administrator/Sqft/updateSqft';
+$route['delete_sqft'] = 'Administrator/Sqft/deleteSqft';
+$route['get_sqft']    = 'Administrator/Sqft/getSqft';
+// bed
+$route['bed']        = 'Administrator/Bed';
+$route['add_bed'] = 'Administrator/Bed/addBed';
+$route['update_bed'] = 'Administrator/Bed/updateBed';
+$route['delete_bed'] = 'Administrator/Bed/deleteBed';
+$route['get_bed']    = 'Administrator/Bed/getBed';
+// servant_bed
+$route['servant_bed']        = 'Administrator/ServantBed';
+$route['add_servant_bed'] = 'Administrator/ServantBed/addServantBed';
+$route['update_servant_bed'] = 'Administrator/ServantBed/updateServantBed';
+$route['delete_servant_bed'] = 'Administrator/ServantBed/deleteServantBed';
+$route['get_servant_bed']    = 'Administrator/ServantBed/getServantBed';
+// bath
+$route['bath']        = 'Administrator/Bath';
+$route['add_bath'] = 'Administrator/Bath/addBath';
+$route['update_bath'] = 'Administrator/Bath/updateBath';
+$route['delete_bath'] = 'Administrator/Bath/deleteBath';
+$route['get_bath']    = 'Administrator/Bath/getBath';
+// servant_bath
+$route['servant_bath']        = 'Administrator/ServantBath';
+$route['add_servant_bath'] = 'Administrator/ServantBath/addServantBath';
+$route['update_servant_bath'] = 'Administrator/ServantBath/updateServantBath';
+$route['delete_servant_bath'] = 'Administrator/ServantBath/deleteServantBath';
+$route['get_servant_bath']    = 'Administrator/ServantBath/getServantBath';
+// balcony
+$route['balcony']        = 'Administrator/Balcony';
+$route['add_balcony'] = 'Administrator/Balcony/addBalcony';
+$route['update_balcony'] = 'Administrator/Balcony/updateBalcony';
+$route['delete_balcony'] = 'Administrator/Balcony/deleteBalcony';
+$route['get_balcony']    = 'Administrator/Balcony/getBalcony';
+// apt_face
+$route['apt_face']        = 'Administrator/Face';
+$route['add_apt_face'] = 'Administrator/Face/addFace';
+$route['update_apt_face'] = 'Administrator/Face/updateFace';
+$route['delete_apt_face'] = 'Administrator/Face/deleteFace';
+$route['get_apt_face']    = 'Administrator/Face/getFace';
+// drawing
+$route['drawing']        = 'Administrator/Drawing';
+$route['add_drawing'] = 'Administrator/Drawing/addDrawing';
+$route['update_drawing'] = 'Administrator/Drawing/updateDrawing';
+$route['delete_drawing'] = 'Administrator/Drawing/deleteDrawing';
+$route['get_drawing']    = 'Administrator/Drawing/getDrawing';
+// apt_type
+$route['apt_type']        = 'Administrator/AptType';
+$route['add_apt_type'] = 'Administrator/AptType/addAptType';
+$route['update_apt_type'] = 'Administrator/AptType/updateAptType';
+$route['delete_apt_type'] = 'Administrator/AptType/deleteAptType';
+$route['get_apt_type']    = 'Administrator/AptType/getAptType';
+// apt_status
+$route['apt_status']        = 'Administrator/AptStatus';
+$route['add_apt_status'] = 'Administrator/AptStatus/addAptStatus';
+$route['update_apt_status'] = 'Administrator/AptStatus/updateAptStatus';
+$route['delete_apt_status'] = 'Administrator/AptStatus/deleteAptStatus';
+$route['get_apt_status']    = 'Administrator/AptStatus/getAptStatus';
 
 
 // ===================================== Property Management =========================================

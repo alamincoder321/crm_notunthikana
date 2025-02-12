@@ -157,55 +157,255 @@
 
                 <table class="table table-bordered">
                     <tr style="background: #d9d9d9;">
-                        <td colspan="4" style="padding: 10px 0;">
+                        <td colspan="6" style="padding: 10px 0;">
                             <h4 style="text-align: center;margin:0;font-weight:800;font-size:20px;margin-bottom:10px;">Property Information</h4>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 15%;text-align:left;">House No: <sup class="text-danger">*</sup></td>
-                        <td style="width: 35%;">
-                            <input type="text" class="form-control" v-model="property.house_no" autocomplete="off" placeholder="Typing...">
-                        </td>
-                        <td style="width: 15%;text-align:left;">House Name:</td>
-                        <td style="width: 35%;">
-                            <input type="text" class="form-control" v-model="property.house_name" autocomplete="off" placeholder="Typing...">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 15%;text-align:left;">Road No: <sup class="text-danger">*</sup></td>
-                        <td style="width: 35%;">
-                            <input type="text" class="form-control" v-model="property.road_no" autocomplete="off" placeholder="Typing...">
-                        </td>
-                        <td style="width: 15%;text-align:left;">Dev. Name:</td>
-                        <td style="width: 35%;">
-                            <input type="text" class="form-control" v-model="property.developer_name" autocomplete="off" placeholder="Typing...">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 15%;text-align:left;">Zone: <sup class="text-danger">*</sup></td>
-                        <td style="width: 35%;">
+                        <td style="width: 10%;text-align:left;">Sqft: <sup class="text-danger">*</sup></td>
+                        <td style="width: 20%;">
                             <div style="display: flex;align-items: center;justify-content: center;">
                                 <div style="width: 90%;">
-                                    <v-select :options="zones" style="margin: 0;" v-model="selectedZone" label="Zone_Name"></v-select>
+                                    <v-select :options="sqfts" style="margin: 0;" v-model="selectedSqft" label="Sqft_Name"></v-select>
                                 </div>
                                 <div style="width: 10%;">
                                     <button type="button" onclick="window.open('/zone', '_blank')"><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                         </td>
-                        <td style="width: 15%;text-align:left;">Land Size:</td>
-                        <td style="width: 35%;">
-                            <input type="text" class="form-control" v-model="property.land_size" autocomplete="off" placeholder="Typing...">
+                        <td style="width: 10%;text-align:left;">Floor: <sup class="text-danger">*</sup></td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="floors" style="margin: 0;" v-model="selectedFloor" label="Floor_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/floor', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 10%;text-align:left;">Gas: <sup class="text-danger">*</sup></td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="gass" style="margin: 0;" v-model="selectedGas" label="Gas_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/gas', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 15%;text-align:left;">Area: <sup class="text-danger">*</sup></td>
-                        <td style="width: 35%;">
-                            <input type="text" class="form-control" v-model="property.address" autocomplete="off" placeholder="Typing...">
+                        <td style="width: 10%;text-align:left;">Bed: <sup class="text-danger">*</sup></td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="beds" style="margin: 0;" v-model="selectedBed" label="Bed_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/bed', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
                         </td>
-                        <td style="width: 15%;text-align:left;">Building Height:</td>
-                        <td style="width: 35%;">
-                            <input type="text" class="form-control" v-model="property.building_height" autocomplete="off" placeholder="Typing...">
+                        <td style="width: 10%;text-align:left;">Unit: <sup class="text-danger">*</sup></td>
+                        <td style="width: 20%;">
+                            <input type="text" class="form-control" v-model="property.unit" autocomplete="off" placeholder="Typing...">
+                        </td>
+                        <td style="width: 10%;text-align:left;">Lift: <sup class="text-danger">*</sup></td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="lifts" style="margin: 0;" v-model="selectedLift" label="Lift_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/lift', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;text-align:left;">Bath: <sup class="text-danger">*</sup></td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="baths" style="margin: 0;" v-model="selectedBath" label="Bath_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/bath', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 10%;text-align:left;">S.Bed:</td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="sbeds" style="margin: 0;" v-model="selectedServantBed" label="Sbed_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/servant_bed', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 10%;text-align:left;">Generator: <sup class="text-danger">*</sup></td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="generators" style="margin: 0;" v-model="selectedGenerator" label="Generator_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/generator', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;text-align:left;">S.Bath:</td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="sbaths" style="margin: 0;" v-model="selectedServantBath" label="Sbath_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/servant_bath', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 10%;text-align:left;">Drawing/Dining:</td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="drawings" style="margin: 0;" v-model="selectedDrawing" label="Drawing_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/drawing', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 10%;text-align:left;">Balcony:</td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="balconys" style="margin: 0;" v-model="selectedBalcony" label="Balcony_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/balcony', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;text-align:left;">Apt. Face:</td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="faces" style="margin: 0;" v-model="selectedFace" label="Face_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/apt_face', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 10%;text-align:left;">Handover:</td>
+                        <td style="width: 20%;">
+                            <input type="text" class="form-control" v-model="property.handover" autocomplete="off" placeholder="Typing...">
+                        </td>
+                        <td style="width: 10%;text-align:left;">Total Unit:</td>
+                        <td style="width: 20%;">
+                            <input type="text" class="form-control" v-model="property.total_unit" autocomplete="off" placeholder="Typing...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;text-align:left;">Per. Tenant:</td>
+                        <td style="width: 20%;">
+                            <input type="text" class="form-control" v-model="property.per_tenant" autocomplete="off" placeholder="Typing...">
+                        </td>
+                        <td style="width: 10%;text-align:left;">Parking: <sup class="text-danger">*</sup></td>
+                        <td style="width: 20%;">
+                            <input type="text" class="form-control" v-model="property.parking" autocomplete="off" placeholder="Typing...">
+                        </td>
+                        <td style="width: 10%;text-align:left;">Pet Policy: <sup class="text-danger">*</sup></td>
+                        <td style="width: 20%;">
+                            <input type="text" class="form-control" v-model="property.pet_policy" autocomplete="off" placeholder="Typing...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;text-align:left;">Apt. Type:</td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="types" style="margin: 0;" v-model="selectedType" label="Type_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/apt_type', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 10%;text-align:left;">Apt. Status:</td>
+                        <td style="width: 20%;">
+                            <div style="display: flex;align-items: center;justify-content: center;">
+                                <div style="width: 90%;">
+                                    <v-select :options="statuss" style="margin: 0;" v-model="selectedStatus" label="Status_Name"></v-select>
+                                </div>
+                                <div style="width: 10%;">
+                                    <button type="button" onclick="window.open('/apt_status', '_blank')"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 10%;text-align:left;">Others:</td>
+                        <td style="width: 20%;">
+                            <input type="text" class="form-control" v-model="property.others" autocomplete="off" placeholder="Typing...">
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table table-bordered">
+                    <tr style="background: #d9d9d9;">
+                        <td colspan="2" style="padding: 10px 0;">
+                            <h4 style="text-align: center;margin:0;font-weight:800;font-size:20px;margin-bottom:10px;">Property Price</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;text-align:left;">Monthly Rent: <sup class="text-danger">*</sup></td>
+                        <td style="width: 75%;">
+                            <input type="text" class="form-control" v-model="property.monthly_rent" autocomplete="off" placeholder="Typing...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;text-align:left;">Service Charge: <sup class="text-danger">*</sup></td>
+                        <td style="width: 75%;">
+                            <input type="text" class="form-control" v-model="property.service_charge" autocomplete="off" placeholder="Typing...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;text-align:left;">Advanced/Security Money: <sup class="text-danger">*</sup></td>
+                        <td style="width: 75%;">
+                            <input type="text" class="form-control" v-model="property.advanced" autocomplete="off" placeholder="Typing...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;text-align:left;">Available Month/Vacant: <sup class="text-danger">*</sup></td>
+                        <td style="width: 75%;">
+                            <input type="text" class="form-control" v-model="property.vacant" autocomplete="off" placeholder="Typing...">
+                        </td>
+                    </tr>
+                </table>
+                <table class="table table-bordered">
+                    <tr style="background: #d9d9d9;">
+                        <td colspan="2" style="padding: 10px 0;">
+                            <h4 style="text-align: center;margin:0;font-weight:800;font-size:20px;margin-bottom:10px;">MOU</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;text-align:left;">Percentage:</td>
+                        <td style="width: 75%;">
+                            <input type="text" class="form-control" v-model="property.percentage" autocomplete="off" placeholder="Typing...">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;text-align:left;">B2B:</td>
+                        <td style="width: 75%;">
+                            <input type="text" class="form-control" v-model="property.btob" autocomplete="off" placeholder="Typing...">
                         </td>
                     </tr>
                 </table>
@@ -247,6 +447,32 @@
                 selectedZone: null,
                 floors: [],
                 selectedFloor: null,
+                gass: [],
+                selectedGas: null,
+                sqfts: [],
+                selectedSqft: null,
+                beds: [],
+                selectedBed: null,
+                sbeds: [],
+                selectedServantBed: null,
+                baths: [],
+                selectedBath: null,
+                sbaths: [],
+                selectedServantBath: null,
+                lifts: [],
+                selectedLift: null,
+                drawings: [],
+                selectedDrawing: null,
+                generators: [],
+                selectedGenerator: null,
+                balconys: [],
+                selectedBalcony: null,
+                faces: [],
+                selectedFace: null,
+                types: [],
+                selectedType: null,
+                statuss: [],
+                selectedStatus: null,
                 users: [],
                 selectedUser: null,
                 employees: [],
@@ -265,6 +491,19 @@
             this.getFloors();
             this.getCategory();
             this.getZone();
+            this.getSqft();
+            this.getLift();
+            this.getGenerator();
+            this.getGas();
+            this.getBalcony();
+            this.getBath();
+            this.getBed();
+            this.getFace();
+            this.getDrawing();
+            this.getAptType();
+            this.getAptStatus();
+            this.getServantBed();
+            this.getServantBath();
             this.getEmployees();
             this.getProperty();
         },
@@ -291,6 +530,71 @@
             getFloors() {
                 axios.get('/get_floor').then(res => {
                     this.floors = res.data;
+                })
+            },
+            getSqft() {
+                axios.get('/get_sqft').then(res => {
+                    this.sqfts = res.data;
+                })
+            },
+            getGas() {
+                axios.get('/get_gas').then(res => {
+                    this.gass = res.data;
+                })
+            },
+            getBed() {
+                axios.get('/get_bed').then(res => {
+                    this.beds = res.data;
+                })
+            },
+            getServantBed() {
+                axios.get('/get_servant_bed').then(res => {
+                    this.sbeds = res.data;
+                })
+            },
+            getLift() {
+                axios.get('/get_lift').then(res => {
+                    this.lifts = res.data;
+                })
+            },
+            getBath() {
+                axios.get('/get_bath').then(res => {
+                    this.baths = res.data;
+                })
+            },
+            getServantBath() {
+                axios.get('/get_servant_bath').then(res => {
+                    this.sbaths = res.data;
+                })
+            },
+            getGenerator() {
+                axios.get('/get_generator').then(res => {
+                    this.generators = res.data;
+                })
+            },
+            getBalcony() {
+                axios.get('/get_balcony').then(res => {
+                    this.balconys = res.data;
+                })
+            },
+            getDrawing() {
+                axios.get('/get_drawing').then(res => {
+                    this.drawings = res.data;
+                })
+            },
+            getFace() {
+                axios.get('/get_apt_face').then(res => {
+                    this.faces = res.data;
+                })
+            },
+            getAptType() {
+                axios.get('/get_apt_type').then(res => {
+                    this.types = res.data;
+                })
+            },
+            getAptStatus() {
+                axios.get('/get_apt_status').then(res => {
+                    this.statuss = res.data;
                 })
             },
             getEmployees() {

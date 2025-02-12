@@ -1,0 +1,152 @@
+<div id="type">
+    <form @submit.prevent="saveData">
+        <div class="row" style="margin-top: 10px;margin-bottom:15px;border-bottom: 1px solid #ccc;padding-bottom:15px;">
+            <div class="col-md-6 col-xs-12 col-md-offset-3">
+                <div class="form-group clearfix">
+                    <label class="control-label col-md-4">Apt. Type Name:</label>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" v-model="type.Type_Name" required>
+                    </div>
+                </div>
+
+                <div class="form-group clearfix">
+                    <div class="col-md-7 col-md-offset-4 text-right">
+                        <input type="submit" class="btn btn-success btn-sm" value="Save">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-sm-12 form-inline">
+            <div class="form-group">
+                <label for="filter" class="sr-only">Filter</label>
+                <input type="text" class="form-control" v-model="filter" placeholder="Filter">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <datatable :columns="columns" :data="types" :filter-by="filter" style="margin-bottom: 5px;">
+                    <template scope="{ row }">
+                        <tr>
+                            <td>{{ row.sl }}</td>
+                            <td>{{ row.Type_Name }}</td>
+                            <td>
+                                <?php if ($this->session->userdata('accountType') != 'u') { ?>
+                                    <button type="button" class="button edit" @click="editData(row)">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                    <button type="button" class="button" @click="deleteData(row.Type_SlNo)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                    </template>
+                </datatable>
+                <datatable-pager v-model="page" type="abbreviated" :per-page="per_page" style="margin-bottom: 50px;"></datatable-pager>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="<?php echo base_url(); ?>assets/js/vue/vue.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/vue/axios.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/vue/vuejs-datatable.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/moment.min.js"></script>
+
+<script>
+    new Vue({
+        el: '#type',
+        data() {
+            return {
+                type: {
+                    Type_SlNo: 0,
+                    Type_Name: '',
+                },
+                types: [],
+
+                columns: [{
+                        label: 'Sl',
+                        field: 'sl',
+                        align: 'center'
+                    },
+                    {
+                        label: 'Apt. Type Name',
+                        field: 'Type_Name',
+                        align: 'center'
+                    },
+                    {
+                        label: 'Action',
+                        align: 'center',
+                        filterable: false
+                    }
+                ],
+                page: 1,
+                per_page: 100,
+                filter: ''
+            }
+        },
+        created() {
+            this.getData();
+        },
+        methods: {
+            getData() {
+                axios.get('/get_apt_type').then(res => {
+                    this.types = res.data.map((item, index) => {
+                        item.sl = index + 1;
+                        return item;
+                    });
+                })
+            },
+
+            saveData() {
+                let url = '/add_apt_type';
+                if (this.type.Type_SlNo != 0) {
+                    url = '/update_apt_type';
+                }
+
+                axios.post(url, this.type).then(res => {
+                    let r = res.data;
+                    alert(r.message);
+                    if (r.status) {
+                        this.resetForm();
+                        this.getData();
+                    }
+                })
+            },
+            editData(type) {
+                let keys = Object.keys(this.type);
+                keys.forEach(key => {
+                    this.type[key] = type[key];
+                })
+            },
+            deleteData(typeId) {
+                let deleteConfirm = confirm('Are you sure?');
+                if (deleteConfirm == false) {
+                    return;
+                }
+                axios.post('/delete_apt_type', {
+                    typeId: typeId
+                }).then(res => {
+                    let r = res.data;
+                    alert(r.message);
+                    if (r.status) {
+                        this.getData();
+                    }
+                })
+            },
+            resetForm() {
+                let keys = Object.keys(this.type);
+                keys.forEach(key => {
+                    if (typeof(this.type[key]) == 'string') {
+                        this.type[key] = '';
+                    } else if (typeof(this.type[key]) == 'number') {
+                        this.type[key] = 0;
+                    }
+                })
+            }
+        }
+    })
+</script>
