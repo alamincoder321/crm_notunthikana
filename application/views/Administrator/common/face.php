@@ -93,7 +93,7 @@
         },
         methods: {
             getData() {
-                axios.get('/get_face').then(res => {
+                axios.get('/get_apt_face').then(res => {
                     this.faces = res.data.map((item, index) => {
                         item.sl = index + 1;
                         return item;
@@ -102,9 +102,9 @@
             },
 
             saveData() {
-                let url = '/add_face';
+                let url = '/add_apt_face';
                 if (this.face.Face_SlNo != 0) {
-                    url = '/update_face';
+                    url = '/update_apt_face';
                 }
 
                 axios.post(url, this.face).then(res => {
@@ -127,7 +127,7 @@
                 if (deleteConfirm == false) {
                     return;
                 }
-                axios.post('/delete_face', {
+                axios.post('/delete_apt_face', {
                     faceId: faceId
                 }).then(res => {
                     let r = res.data;

@@ -89,13 +89,26 @@ class Model_Table extends CI_Model
 
     public function generatePropertyCode()
     {
-        $propertyCode = "PR00001";
+        $propertyCode = "NTR-00001";
 
         $lastProduct = $this->db->query("select * from tbl_property order by Property_SlNo desc limit 1");
         if ($lastProduct->num_rows() != 0) {
             $newPropertyId = $lastProduct->row()->Property_SlNo + 1;
             $zeros = array('0', '00', '000', '0000');
-            $propertyCode = 'PR' . (strlen($newPropertyId) > count($zeros) ? $newPropertyId : $zeros[count($zeros) - strlen($newPropertyId)] . $newPropertyId);
+            $propertyCode = 'NTR-' . (strlen($newPropertyId) > count($zeros) ? $newPropertyId : $zeros[count($zeros) - strlen($newPropertyId)] . $newPropertyId);
+        }
+
+        return $propertyCode;
+    }
+    public function generatesalePropertyCode()
+    {
+        $propertyCode = "NT-00001";
+
+        $lastProduct = $this->db->query("select * from tbl_sale_property order by Property_SlNo desc limit 1");
+        if ($lastProduct->num_rows() != 0) {
+            $newPropertyId = $lastProduct->row()->Property_SlNo + 1;
+            $zeros = array('0', '00', '000', '0000');
+            $propertyCode = 'NTR-' . (strlen($newPropertyId) > count($zeros) ? $newPropertyId : $zeros[count($zeros) - strlen($newPropertyId)] . $newPropertyId);
         }
 
         return $propertyCode;

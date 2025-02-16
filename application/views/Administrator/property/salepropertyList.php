@@ -96,11 +96,9 @@
                             <td>{{ row.Face_Name }}</td>
                             <td>{{ row.handover }}</td>
                             <td>{{ row.total_unit }}</td>
-                            <td>{{ row.tenant }}</td>
                             <td>{{ row.parking }}</td>
-                            <td>{{ row.pet_policy }}</td>
+                            <td>{{ row.loan_status }}</td>
                             <td>{{ row.Type_Name }}</td>
-                            <td>{{ row.Status_Name }}</td>
                             <td>{{ row.others }}</td>
                             <td>{{ row.owner_name }}</td>
                             <td>{{ row.owner_number }}</td>
@@ -108,15 +106,14 @@
                             <td>{{ row.living_at }}</td>
                             <td>{{ row.manager_name }}</td>
                             <td>{{ row.manager_number }}</td>
-                            <td>{{ row.monthly_rent }}</td>
-                            <td>{{ row.service_charge }}</td>
-                            <td>{{ row.advanced }}</td>
-                            <td>{{ row.vacant }}</td>
+                            <td>{{ row.package_price }}</td>
+                            <td>{{ row.sft_price }}</td>
+                            <td>{{ row.utility_price }}</td>
                             <td>{{ row.percentage }}</td>
-                            <td>{{ row.btob }}</td>
+                            <td>{{ row.fixed_price }}</td>
                             <td>
                                 <?php if ($this->session->userdata('accountType') != 'u') { ?>
-                                    <a href="" :href="`/property_entry/${row.Property_SlNo}`" class="button edit">
+                                    <a href="" :href="`/sale_property/${row.Property_SlNo}`" class="button edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 <?php } ?>
@@ -277,28 +274,18 @@
                         align: 'center'
                     },
                     {
-                        label: 'Per_Tenant',
-                        field: 'per_tenant',
-                        align: 'center'
-                    },
-                    {
                         label: 'Parking',
                         field: 'parking',
                         align: 'center'
                     },
                     {
-                        label: 'Pet_Policy',
-                        field: 'pet_policy',
+                        label: 'Loan_Status',
+                        field: 'loan_status',
                         align: 'center'
                     },
                     {
                         label: 'Apt. Type',
                         field: 'Type_Name',
-                        align: 'center'
-                    },
-                    {
-                        label: 'Apt. Status',
-                        field: 'Status_Name',
                         align: 'center'
                     },
                     {
@@ -337,23 +324,18 @@
                         align: 'center'
                     },
                     {
-                        label: 'Monthly_Rent',
-                        field: 'monthly_rent',
+                        label: 'Package_Price',
+                        field: 'package_price',
                         align: 'center'
                     },
                     {
-                        label: 'Service_Charge',
-                        field: 'service_charge',
+                        label: 'Per_Sft_Price',
+                        field: 'sft_price',
                         align: 'center'
                     },
                     {
-                        label: 'Advanced',
-                        field: 'advanced',
-                        align: 'center'
-                    },
-                    {
-                        label: 'Vacant',
-                        field: 'vacant',
+                        label: 'Parking+Utilities',
+                        field: 'utility_price',
                         align: 'center'
                     },
                     {
@@ -362,8 +344,8 @@
                         align: 'center'
                     },
                     {
-                        label: 'BtoB',
-                        field: 'btob',
+                        label: 'Fixed Price',
+                        field: 'fixed_price',
                         align: 'center'
                     },
                     {
@@ -413,7 +395,7 @@
             },
 
             getProperty() {
-                axios.post('/get_property').then(res => {
+                axios.post('/get_sale_property').then(res => {
                     this.properties = res.data.map((item, index) => {
                         item.sl = index + 1;
                         return item;
@@ -423,7 +405,7 @@
 
             deleteProperty(rowId) {
                 if (!confirm("Are you sure?")) return;
-                axios.post('/delete_property', {
+                axios.post('/delete_sale_property', {
                     propertyId: rowId
                 }).then(res => {
                     alert(res.data.message)

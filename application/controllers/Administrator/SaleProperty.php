@@ -1,5 +1,5 @@
 <?php
-class Property extends CI_Controller
+class SaleProperty extends CI_Controller
 {
     public function __construct()
     {
@@ -19,10 +19,10 @@ class Property extends CI_Controller
             redirect(base_url());
         }
 
-        $data['title'] = "Property Entry";
+        $data['title'] = "Sale Property Entry";
         $data['propertyId'] = 0;
-        $data['propertyCode'] = $this->mt->generatePropertyCode();
-        $data['content'] = $this->load->view('Administrator/property/add_property', $data, TRUE);
+        $data['propertyCode'] = $this->mt->generatesalePropertyCode();
+        $data['content'] = $this->load->view('Administrator/property/sale_property', $data, TRUE);
         $this->load->view('Administrator/index', $data);
     }
 
@@ -33,10 +33,10 @@ class Property extends CI_Controller
             redirect(base_url());
         }
 
-        $data['title'] = "Property Entry";
+        $data['title'] = "Sale Property Edit";
         $data['propertyId'] = $id;
         $data['propertyCode'] = $this->mt->generatePropertyCode();
-        $data['content'] = $this->load->view('Administrator/property/add_property', $data, TRUE);
+        $data['content'] = $this->load->view('Administrator/property/sale_property', $data, TRUE);
         $this->load->view('Administrator/index', $data);
     }
 
@@ -84,10 +84,9 @@ class Property extends CI_Controller
                     dr.Drawing_Name,
                     bl.Balcony_Name,
                     apf.Face_Name,
-                    apt.Type_Name,
-                    aps.Status_Name
+                    apt.Type_Name
 
-                    from tbl_property pr
+                    from tbl_sale_property pr
                     left join tbl_property_category pc on pc.Category_SlNo = pr.category_id
                     left join tbl_zone z on z.Zone_SlNo = pr.zone_id
                     left join tbl_sqft sq on sq.Sqft_SlNo = pr.sqft_id
@@ -103,7 +102,6 @@ class Property extends CI_Controller
                     left join tbl_balcony bl on bl.Balcony_SlNo = pr.balcony_id
                     left join tbl_apt_face apf on apf.Face_SlNo = pr.face_id
                     left join tbl_apt_type apt on apt.Type_SlNo = pr.type_id
-                    left join tbl_apt_status aps on aps.Status_SlNo = pr.status_id
                     left join tbl_user u on u.User_SlNo = pr.user_id
                     where pr.Status != 'd'
                     $clauses
@@ -121,22 +119,27 @@ class Property extends CI_Controller
                 'category_id',
                 'house_no',
                 'road_no',
+                'developer_name',
+                'land_size',
+                'building_height',
                 'address',
                 'unit',
                 'parking',
-                'pet_policy',
-                'monthly_rent',
-                'advanced',
-                'service_charge',
-                'vacant',
                 'zone_id',
-                'floor_id',
                 'sqft_id',
+                'floor_id',
                 'gas_id',
                 'bed_id',
-                'bath_id',
+                'sbed_id',
+                'lift_id',
                 'generator_id',
-                'lift_id'
+                'bath_id',
+                'sbath_id',
+                'drawing_id',
+                'face_id',
+                'handover',
+                'total_unit',
+                'type_id',
             );
 
             unset($propertyObj->Property_SlNo);
@@ -150,7 +153,7 @@ class Property extends CI_Controller
                 }
             }
 
-            $propertyCodeCount = $this->db->query("select * from tbl_property where Property_Code = ?", $propertyObj->Property_Code)->num_rows();
+            $propertyCodeCount = $this->db->query("select * from tbl_sale_property where Property_Code = ?", $propertyObj->Property_Code)->num_rows();
             if ($propertyCodeCount > 0) {
                 $propertyObj->Property_Code = $this->mt->generatePropertyCode();
             }
@@ -161,9 +164,9 @@ class Property extends CI_Controller
             $property['AddTime'] = date('Y-m-d H:i:s');
             $property['branchId'] = $this->branchId;
 
-            $this->db->insert('tbl_property', $property);
+            $this->db->insert('tbl_sale_property', $property);
 
-            $res = ['success' => true, 'message' => 'Property added successfully', 'propertyCode' => $this->mt->generatePropertyCode()];
+            $res = ['success' => true, 'message' => 'Sale Property added successfully', 'propertyCode' => $this->mt->generatePropertyCode()];
         } catch (Exception $ex) {
             $res = ['success' => false, 'message' => $ex->getMessage()];
         }
@@ -181,22 +184,27 @@ class Property extends CI_Controller
                 'category_id',
                 'house_no',
                 'road_no',
+                'developer_name',
+                'land_size',
+                'building_height',
                 'address',
                 'unit',
                 'parking',
-                'pet_policy',
-                'monthly_rent',
-                'advanced',
-                'service_charge',
-                'vacant',
                 'zone_id',
-                'floor_id',
                 'sqft_id',
+                'floor_id',
                 'gas_id',
                 'bed_id',
-                'bath_id',
+                'sbed_id',
+                'lift_id',
                 'generator_id',
-                'lift_id'
+                'bath_id',
+                'sbath_id',
+                'drawing_id',
+                'face_id',
+                'handover',
+                'total_unit',
+                'type_id',
             );
 
             unset($propertyObj->Property_SlNo);
@@ -210,7 +218,7 @@ class Property extends CI_Controller
                 }
             }
 
-            $propertyCodeCount = $this->db->query("select * from tbl_property where Property_Code = ? and Property_SlNo != ?", [$propertyObj->Property_Code, $propertyId])->num_rows();
+            $propertyCodeCount = $this->db->query("select * from tbl_sale_property where Property_Code = ? and Property_SlNo != ?", [$propertyObj->Property_Code, $propertyId])->num_rows();
             if ($propertyCodeCount > 0) {
                 $res = ['success' => false, 'message' => 'Property code already exists'];
                 echo json_encode($res);
@@ -223,9 +231,9 @@ class Property extends CI_Controller
             $property['branchId'] = $this->branchId;
 
             $this->db->where('Property_SlNo', $propertyId);
-            $this->db->update('tbl_property', $property);
+            $this->db->update('tbl_sale_property', $property);
 
-            $res = ['success' => true, 'message' => 'Property update successfully', 'propertyCode' => $this->mt->generatePropertyCode()];
+            $res = ['success' => true, 'message' => 'Sale Property update successfully', 'propertyCode' => $this->mt->generatePropertyCode()];
         } catch (Exception $ex) {
             $res = ['success' => false, 'message' => $ex->getMessage()];
         }
@@ -239,9 +247,9 @@ class Property extends CI_Controller
         try {
             $data = json_decode($this->input->raw_input_stream);
 
-            $this->db->set(['status' => 'd'])->where('Property_SlNo', $data->propertyId)->update('tbl_property');
+            $this->db->set(['Status' => 'd'])->where('Property_SlNo', $data->propertyId)->update('tbl_sale_property');
 
-            $res = ['success' => true, 'message' => 'Property deleted successfully'];
+            $res = ['success' => true, 'message' => 'Sale Property deleted successfully'];
         } catch (Exception $ex) {
             $res = ['success' => false, 'message' => $ex->getMessage()];
         }
@@ -256,8 +264,8 @@ class Property extends CI_Controller
             redirect(base_url());
         }
 
-        $data['title'] = "Property List";
-        $data['content'] = $this->load->view('Administrator/property/propertyList', $data, TRUE);
+        $data['title'] = "Sale Property List";
+        $data['content'] = $this->load->view('Administrator/property/salepropertyList', $data, TRUE);
         $this->load->view('Administrator/index', $data);
     }
 }

@@ -280,40 +280,41 @@ if ($module == 'dashboard' or $module == '') {
 			<li class="">
 				<a href="<?php echo base_url(); ?>property_entry">
 					<i class="menu-icon fa fa-plus-square-o"></i>
-					<span class="menu-text"> Property Entry </span>
+					<span class="menu-text"> Rent Property </span>
 				</a>
 				<b class="arrow"></b>
 			</li>
 		<?php endif; ?>
-
 		<?php if (array_search("property_list", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
 			<li class="">
 				<a href="<?php echo base_url(); ?>property_list">
-					<i class="menu-icon fa fa-list-alt"></i>
-					<span class="menu-text"> Property List </span>
+					<i class="menu-icon fa fa-list"></i>
+					<span class="menu-text"> Rent Property List </span>
 				</a>
 				<b class="arrow"></b>
 			</li>
 		<?php endif; ?>
 
-		<?php if (array_search("floor", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+		<?php if (array_search("sale_property", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
 			<li class="">
-				<a href="<?php echo base_url(); ?>floor">
-					<i class="menu-icon fa fa-building-o"></i>
-					<span class="menu-text"> Floor Entry </span>
+				<a href="<?php echo base_url(); ?>sale_property">
+					<i class="menu-icon fa fa-plus-square-o"></i>
+					<span class="menu-text"> Sale Property </span>
 				</a>
 				<b class="arrow"></b>
 			</li>
 		<?php endif; ?>
-		<?php if (array_search("property_category", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+
+		<?php if (array_search("sale_property_list", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
 			<li class="">
-				<a href="<?php echo base_url(); ?>property_category">
-					<i class="menu-icon fa fa-plus-square"></i>
-					<span class="menu-text"> Category Entry </span>
+				<a href="<?php echo base_url(); ?>sale_property_list">
+					<i class="menu-icon fa fa-list"></i>
+					<span class="menu-text"> Sale Property List </span>
 				</a>
 				<b class="arrow"></b>
 			</li>
 		<?php endif; ?>
+
 	</ul>
 
 <?php } elseif ($module == 'HRPayroll') { ?>

@@ -102,11 +102,11 @@ $route['update_balcony'] = 'Administrator/Balcony/updateBalcony';
 $route['delete_balcony'] = 'Administrator/Balcony/deleteBalcony';
 $route['get_balcony']    = 'Administrator/Balcony/getBalcony';
 // apt_face
-$route['apt_face']        = 'Administrator/Face';
-$route['add_apt_face'] = 'Administrator/Face/addFace';
-$route['update_apt_face'] = 'Administrator/Face/updateFace';
-$route['delete_apt_face'] = 'Administrator/Face/deleteFace';
-$route['get_apt_face']    = 'Administrator/Face/getFace';
+$route['apt_face']        = 'Administrator/AptFace';
+$route['add_apt_face'] = 'Administrator/AptFace/addAptFace';
+$route['update_apt_face'] = 'Administrator/AptFace/updateAptFace';
+$route['delete_apt_face'] = 'Administrator/AptFace/deleteAptFace';
+$route['get_apt_face']    = 'Administrator/AptFace/getAptFace';
 // drawing
 $route['drawing']        = 'Administrator/Drawing';
 $route['add_drawing'] = 'Administrator/Drawing/addDrawing';
@@ -128,13 +128,23 @@ $route['get_apt_status']    = 'Administrator/AptStatus/getAptStatus';
 
 
 // ===================================== Property Management =========================================
+//rent property
 $route['property_entry'] = 'Administrator/Property';
+$route['property_entry/(:any)'] = 'Administrator/Property/editProperty/$1';
 $route['get_property'] = 'Administrator/Property/getProperty';
 $route['add_property'] = 'Administrator/Property/addProperty';
 $route['update_property'] = 'Administrator/Property/updateProperty';
 $route['delete_property'] = 'Administrator/Property/deleteProperty';
 $route['property_list'] = 'Administrator/Property/propertyList';
-$route['download_property/(:any)/(:any)'] = 'Administrator/Property/downloadxlxProperty/$1/$2';
+
+//sale property
+$route['sale_property'] = 'Administrator/SaleProperty';
+$route['sale_property/(:any)'] = 'Administrator/SaleProperty/editProperty/$1';
+$route['get_sale_property'] = 'Administrator/SaleProperty/getProperty';
+$route['add_sale_property'] = 'Administrator/SaleProperty/addProperty';
+$route['update_sale_property'] = 'Administrator/SaleProperty/updateProperty';
+$route['delete_sale_property'] = 'Administrator/SaleProperty/deleteProperty';
+$route['sale_property_list'] = 'Administrator/SaleProperty/propertyList';
 
 //========================================== User Management ==========================================
 $route['user'] = 'Administrator/User_management';

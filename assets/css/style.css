@@ -250,3 +250,12 @@ textarea {
     font-weight: 900;
     color: white;
 }
+
+.pagination {
+    padding-left: 0;
+    margin: 0px !important;
+    border-radius: 4px;
+}
+nav{
+    margin-bottom: 0 !important;
+}

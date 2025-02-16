@@ -77,7 +77,7 @@
                     <tr style="background: #d9d9d9;">
                         <td colspan="4" style="padding: 10px 0;">
                             <h4 style="text-align: center;margin:0;font-weight:800;font-size:26px;margin-bottom:10px;">Notun Thikana</h4>
-                            <h4 style="text-align: center;margin:0;font-weight:800;font-size:26px;">Rent Product Information</h4>
+                            <h4 style="text-align: center;margin:0;font-weight:800;font-size:26px;">Sale Product Information</h4>
                         </td>
                     </tr>
                     <tr>
@@ -120,7 +120,7 @@
                         <td style="width: 35%;">
                             <input type="text" class="form-control" v-model="property.road_no" autocomplete="off" placeholder="Typing...">
                         </td>
-                        <td style="width: 15%;text-align:left;">Dev. Name:</td>
+                        <td style="width: 15%;text-align:left;">Dev. Name: <sup class="text-danger">*</sup></td>
                         <td style="width: 35%;">
                             <input type="text" class="form-control" v-model="property.developer_name" autocomplete="off" placeholder="Typing...">
                         </td>
@@ -137,7 +137,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td style="width: 15%;text-align:left;">Land Size:</td>
+                        <td style="width: 15%;text-align:left;">Land Size: <sup class="text-danger">*</sup></td>
                         <td style="width: 35%;">
                             <input type="text" class="form-control" v-model="property.land_size" autocomplete="off" placeholder="Typing...">
                         </td>
@@ -147,7 +147,7 @@
                         <td style="width: 35%;">
                             <input type="text" class="form-control" v-model="property.address" autocomplete="off" placeholder="Typing...">
                         </td>
-                        <td style="width: 15%;text-align:left;">Building Height:</td>
+                        <td style="width: 15%;text-align:left;">Building Height: <sup class="text-danger">*</sup></td>
                         <td style="width: 35%;">
                             <input type="text" class="form-control" v-model="property.building_height" autocomplete="off" placeholder="Typing...">
                         </td>
@@ -235,7 +235,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td style="width: 10%;text-align:left;">S.Bed:</td>
+                        <td style="width: 10%;text-align:left;">S.Bed: <sup class="text-danger">*</sup></td>
                         <td style="width: 20%;">
                             <div style="display: flex;align-items: center;justify-content: center;">
                                 <div style="width: 90%;">
@@ -259,7 +259,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 10%;text-align:left;">S.Bath:</td>
+                        <td style="width: 10%;text-align:left;">S.Bath: <sup class="text-danger">*</sup></td>
                         <td style="width: 20%;">
                             <div style="display: flex;align-items: center;justify-content: center;">
                                 <div style="width: 90%;">
@@ -270,7 +270,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td style="width: 10%;text-align:left;">Drawing/Dining:</td>
+                        <td style="width: 10%;text-align:left;">Drawing/Dining: <sup class="text-danger">*</sup></td>
                         <td style="width: 20%;">
                             <div style="display: flex;align-items: center;justify-content: center;">
                                 <div style="width: 90%;">
@@ -281,7 +281,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td style="width: 10%;text-align:left;">Balcony:</td>
+                        <td style="width: 10%;text-align:left;">Balcony: <sup class="text-danger">*</sup></td>
                         <td style="width: 20%;">
                             <div style="display: flex;align-items: center;justify-content: center;">
                                 <div style="width: 90%;">
@@ -294,7 +294,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 10%;text-align:left;">Apt. Face:</td>
+                        <td style="width: 10%;text-align:left;">Apt. Face: <sup class="text-danger">*</sup></td>
                         <td style="width: 20%;">
                             <div style="display: flex;align-items: center;justify-content: center;">
                                 <div style="width: 90%;">
@@ -305,31 +305,31 @@
                                 </div>
                             </div>
                         </td>
-                        <td style="width: 10%;text-align:left;">Handover:</td>
+                        <td style="width: 10%;text-align:left;">Handover: <sup class="text-danger">*</sup></td>
                         <td style="width: 20%;">
                             <input type="text" class="form-control" v-model="property.handover" autocomplete="off" placeholder="Typing...">
                         </td>
-                        <td style="width: 10%;text-align:left;">Total Unit:</td>
+                        <td style="width: 10%;text-align:left;">Total Unit: <sup class="text-danger">*</sup></td>
                         <td style="width: 20%;">
                             <input type="text" class="form-control" v-model="property.total_unit" autocomplete="off" placeholder="Typing...">
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 10%;text-align:left;">Per. Tenant:</td>
+                        <td style="width: 10%;text-align:left;">Others:</td>
                         <td style="width: 20%;">
-                            <input type="text" class="form-control" v-model="property.per_tenant" autocomplete="off" placeholder="Typing...">
+                            <input type="text" class="form-control" v-model="property.others" autocomplete="off" placeholder="Typing...">
                         </td>
                         <td style="width: 10%;text-align:left;">Parking: <sup class="text-danger">*</sup></td>
                         <td style="width: 20%;">
                             <input type="text" class="form-control" v-model="property.parking" autocomplete="off" placeholder="Typing...">
                         </td>
-                        <td style="width: 10%;text-align:left;">Pet Policy: <sup class="text-danger">*</sup></td>
+                        <td style="width: 10%;text-align:left;">Loan Status:</td>
                         <td style="width: 20%;">
-                            <input type="text" class="form-control" v-model="property.pet_policy" autocomplete="off" placeholder="Typing...">
+                            <input type="text" class="form-control" v-model="property.loan_status" autocomplete="off" placeholder="Typing...">
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 10%;text-align:left;">Apt. Type:</td>
+                        <td style="width: 10%;text-align:left;">Apt. Type: <sup class="text-danger">*</sup></td>
                         <td style="width: 20%;">
                             <div style="display: flex;align-items: center;justify-content: center;">
                                 <div style="width: 90%;">
@@ -340,21 +340,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td style="width: 10%;text-align:left;">Apt. Status:</td>
-                        <td style="width: 20%;">
-                            <div style="display: flex;align-items: center;justify-content: center;">
-                                <div style="width: 90%;">
-                                    <v-select :options="statuss" style="margin: 0;" v-model="selectedStatus" label="Status_Name"></v-select>
-                                </div>
-                                <div style="width: 10%;">
-                                    <button type="button" onclick="window.open('/apt_status', '_blank')"><i class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </td>
-                        <td style="width: 10%;text-align:left;">Others:</td>
-                        <td style="width: 20%;">
-                            <input type="text" class="form-control" v-model="property.others" autocomplete="off" placeholder="Typing...">
-                        </td>
+                        <td colspan="4"></td>
                     </tr>
                 </table>
 
@@ -409,27 +395,21 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 25%;text-align:left;">Monthly Rent: <sup class="text-danger">*</sup></td>
+                        <td style="width: 25%;text-align:left;">Package Price: <sup class="text-danger">*</sup></td>
                         <td style="width: 75%;">
-                            <input type="text" class="form-control" v-model="property.monthly_rent" autocomplete="off" placeholder="Typing...">
+                            <input type="text" class="form-control" v-model="property.package_price" autocomplete="off" placeholder="Typing...">
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 25%;text-align:left;">Service Charge: <sup class="text-danger">*</sup></td>
+                        <td style="width: 25%;text-align:left;">Per Sft Price:</td>
                         <td style="width: 75%;">
-                            <input type="text" class="form-control" v-model="property.service_charge" autocomplete="off" placeholder="Typing...">
+                            <input type="text" class="form-control" v-model="property.sft_price" autocomplete="off" placeholder="Typing...">
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 25%;text-align:left;">Advanced/Security Money: <sup class="text-danger">*</sup></td>
+                        <td style="width: 25%;text-align:left;">Parking+Utilities:</td>
                         <td style="width: 75%;">
-                            <input type="text" class="form-control" v-model="property.advanced" autocomplete="off" placeholder="Typing...">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 25%;text-align:left;">Available Month/Vacant: <sup class="text-danger">*</sup></td>
-                        <td style="width: 75%;">
-                            <input type="text" class="form-control" v-model="property.vacant" autocomplete="off" placeholder="Typing...">
+                            <input type="text" class="form-control" v-model="property.utility_price" autocomplete="off" placeholder="Typing...">
                         </td>
                     </tr>
                 </table>
@@ -446,9 +426,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 25%;text-align:left;">B2B:</td>
+                        <td style="width: 25%;text-align:left;">Fixed Price:</td>
                         <td style="width: 75%;">
-                            <input type="text" class="form-control" v-model="property.btob" autocomplete="off" placeholder="Typing...">
+                            <input type="text" class="form-control" v-model="property.fixed_price" autocomplete="off" placeholder="Typing...">
                         </td>
                     </tr>
                     <tr>
@@ -487,22 +467,20 @@
                     unit: '',
                     handover: '',
                     total_unit: '',
-                    per_tenant: '',
-                    parking: '',
-                    pet_policy: '',
                     others: '',
+                    parking: '',
+                    loan_status: '',
                     owner_name: '',
                     owner_number: '',
                     owner_profession: '',
                     living_at: '',
                     manager_name: '',
                     manager_number: '',
-                    monthly_rent: '',
-                    service_charge: '',
-                    advanced: '',
-                    vacant: '',
+                    package_price: '',
+                    sft_price: '',
+                    utility_price: '',
                     percentage: '',
-                    btob: '',
+                    fixed_price: '',
                 },
                 properties: [],
 
@@ -536,8 +514,6 @@
                 selectedFace: null,
                 types: [],
                 selectedType: null,
-                statuss: [],
-                selectedStatus: null,
                 users: [],
                 selectedUser: null,
                 employees: [],
@@ -566,7 +542,6 @@
             this.getFace();
             this.getDrawing();
             this.getAptType();
-            this.getAptStatus();
             this.getServantBed();
             this.getServantBath();
             this.getEmployees();
@@ -660,11 +635,6 @@
                     this.types = res.data;
                 })
             },
-            getAptStatus() {
-                axios.get('/get_apt_status').then(res => {
-                    this.statuss = res.data;
-                })
-            },
             getEmployees() {
                 axios.get('/get_employees').then(res => {
                     this.employees = res.data;
@@ -699,15 +669,12 @@
                 if (this.selectedType != null) {
                     this.property.type_id = this.selectedType.Type_SlNo;
                 }
-                if (this.selectedStatus != null) {
-                    this.property.status_id = this.selectedStatus.Status_SlNo;
-                }
                 let fd = new FormData();
                 fd.append('data', JSON.stringify(this.property));
 
-                let url = '/add_property';
+                let url = '/add_sale_property';
                 if (this.property.Property_SlNo != 0) {
-                    url = '/update_property';
+                    url = '/update_sale_property';
                 }
 
                 axios.post(url, fd).then(res => {
@@ -715,7 +682,7 @@
                     alert(r.message);
                     if (r.success) {
                         if (this.property.Property_SlNo > 0) {
-                            location.href = '/property_entry';
+                            location.href = '/sale_property';
                         }
                         this.resetForm();
                         this.property.Property_Code = r.propertyCode;
@@ -725,8 +692,8 @@
 
             resetForm() {
                 this.property = {
-                    Property_SlNo: 0,
-                    Property_Code: "",
+                    Property_SlNo: "<?= $propertyId; ?>",
+                    Property_Code: "<?= $propertyCode; ?>",
                     house_no: '',
                     house_name: '',
                     road_no: '',
@@ -737,26 +704,24 @@
                     unit: '',
                     handover: '',
                     total_unit: '',
-                    per_tenant: '',
-                    parking: '',
-                    pet_policy: '',
                     others: '',
+                    parking: '',
+                    loan_status: '',
                     owner_name: '',
                     owner_number: '',
                     owner_profession: '',
                     living_at: '',
                     manager_name: '',
                     manager_number: '',
-                    monthly_rent: '',
-                    service_charge: '',
-                    advanced: '',
-                    vacant: '',
+                    package_price: '',
+                    sft_price: '',
+                    utility_price: '',
                     percentage: '',
-                    btob: ''
+                    fixed_price: '',
                 }
             },
             async getProperty() {
-                await axios.post('/get_property', {
+                await axios.post('/get_sale_property', {
                         propertyId: this.property.Property_SlNo
                     })
                     .then(res => {
@@ -781,7 +746,6 @@
                             this.selectedBalcony = this.balconys.find(item => item.Balcony_SlNo == property.balcony_id);
                             this.selectedFace = this.faces.find(item => item.Face_SlNo == property.face_id);
                             this.selectedType = this.types.find(item => item.Type_SlNo == property.type_id);
-                            this.selectedStatus = this.statuss.find(item => item.Status_SlNo == property.status_id);
                         }, 3000);
                     })
             }

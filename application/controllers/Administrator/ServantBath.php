@@ -19,7 +19,7 @@ class ServantBath extends CI_Controller
             redirect(base_url());
         }
         $data['title'] = "ServantBath Entry";
-        $data['content'] = $this->load->view('Administrator/common/bath', $data, TRUE);
+        $data['content'] = $this->load->view('Administrator/common/servantBath', $data, TRUE);
         $this->load->view('Administrator/index', $data);
     }
 

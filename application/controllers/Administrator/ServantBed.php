@@ -29,7 +29,7 @@ class ServantBed extends CI_Controller
         echo json_encode($servantbed);
     }
 
-    public function addBath()
+    public function addServantBed()
     {
         $data = json_decode($this->input->raw_input_stream);
 
