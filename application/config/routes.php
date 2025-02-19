@@ -21,12 +21,22 @@ $route['get_districts'] = 'Administrator/Page/getDistricts';
 
 //========================================= Client Route ======================================
 $route['customer'] = 'Administrator/Customer';
+$route['customer/(:any)'] = 'Administrator/Customer/editCustomer/$1';
+$route['customerList'] = 'Administrator/Customer/customerList';
 $route['add_customer'] = 'Administrator/Customer/addCustomer';
 $route['update_customer'] = 'Administrator/Customer/updateCustomer';
 $route['assign_customer'] = 'Administrator/Customer/assignCustomer';
 $route['delete_customer'] = 'Administrator/Customer/deleteCustomer';
 $route['get_customers'] = 'Administrator/Customer/getCustomers';
-$route['download_customer/(:any)/(:any)'] = 'Administrator/Customer/downloadxlxCustomer/$1/$2';
+//sale
+$route['sale_customer'] = 'Administrator/SaleCustomer';
+$route['sale_customer/(:any)'] = 'Administrator/SaleCustomer/editCustomer/$1';
+$route['sale_customerList'] = 'Administrator/SaleCustomer/customerList';
+$route['add_sale_customer'] = 'Administrator/SaleCustomer/addCustomer';
+$route['update_sale_customer'] = 'Administrator/SaleCustomer/updateCustomer';
+$route['assign_sale_customer'] = 'Administrator/SaleCustomer/assignCustomer';
+$route['delete_sale_customer'] = 'Administrator/SaleCustomer/deleteCustomer';
+$route['get_sale_customers'] = 'Administrator/SaleCustomer/getCustomers';
 
 //====================================== Common Route ======================================
 // zone route
@@ -125,7 +135,36 @@ $route['add_apt_status'] = 'Administrator/AptStatus/addAptStatus';
 $route['update_apt_status'] = 'Administrator/AptStatus/updateAptStatus';
 $route['delete_apt_status'] = 'Administrator/AptStatus/deleteAptStatus';
 $route['get_apt_status']    = 'Administrator/AptStatus/getAptStatus';
-
+// parking
+$route['parking']        = 'Administrator/Parking';
+$route['add_parking'] = 'Administrator/Parking/addParking';
+$route['update_parking'] = 'Administrator/Parking/updateParking';
+$route['delete_parking'] = 'Administrator/Parking/deleteParking';
+$route['get_parking']    = 'Administrator/Parking/getParking';
+// budget
+$route['budget']        = 'Administrator/Budget';
+$route['add_budget'] = 'Administrator/Budget/addBudget';
+$route['update_budget'] = 'Administrator/Budget/updateBudget';
+$route['delete_budget'] = 'Administrator/Budget/deleteBudget';
+$route['get_budget']    = 'Administrator/Budget/getBudget';
+// member
+$route['member']        = 'Administrator/Member';
+$route['add_member'] = 'Administrator/Member/addMember';
+$route['update_member'] = 'Administrator/Member/updateMember';
+$route['delete_member'] = 'Administrator/Member/deleteMember';
+$route['get_member']    = 'Administrator/Member/getMember';
+// condition
+$route['condition']        = 'Administrator/Condition';
+$route['add_condition'] = 'Administrator/Condition/addCondition';
+$route['update_condition'] = 'Administrator/Condition/updateCondition';
+$route['delete_condition'] = 'Administrator/Condition/deleteCondition';
+$route['get_condition']    = 'Administrator/Condition/getCondition';
+// source
+$route['source']        = 'Administrator/Source';
+$route['add_source'] = 'Administrator/Source/addSource';
+$route['update_source'] = 'Administrator/Source/updateSource';
+$route['delete_source'] = 'Administrator/Source/deleteSource';
+$route['get_source']    = 'Administrator/Source/getSource';
 
 // ===================================== Property Management =========================================
 //rent property
@@ -136,6 +175,7 @@ $route['add_property'] = 'Administrator/Property/addProperty';
 $route['update_property'] = 'Administrator/Property/updateProperty';
 $route['delete_property'] = 'Administrator/Property/deleteProperty';
 $route['property_list'] = 'Administrator/Property/propertyList';
+$route['rent_status_update'] = 'Administrator/Property/rentStatusUpdate';
 
 //sale property
 $route['sale_property'] = 'Administrator/SaleProperty';
@@ -145,6 +185,7 @@ $route['add_sale_property'] = 'Administrator/SaleProperty/addProperty';
 $route['update_sale_property'] = 'Administrator/SaleProperty/updateProperty';
 $route['delete_sale_property'] = 'Administrator/SaleProperty/deleteProperty';
 $route['sale_property_list'] = 'Administrator/SaleProperty/propertyList';
+$route['sale_status_update'] = 'Administrator/SaleProperty/saleStatusUpdate';
 
 //========================================== User Management ==========================================
 $route['user'] = 'Administrator/User_management';

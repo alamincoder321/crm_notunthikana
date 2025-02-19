@@ -212,79 +212,49 @@ if ($module == 'dashboard' or $module == '') { ?>
 									<i class="menu-icon fa fa-male"></i>
 								</div>
 								<div class="textModule">
-									Client Entry
+									Rent Lead Entry
 								</div>
 							</a>
 						</div>
 					</div>
 				<?php endif; ?>
-				<?php if (array_search("customerlist/All", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+				<?php if (array_search("customerList", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
 					<div class="col-md-2 col-xs-6 custom-padding ">
 						<div class="col-md-12 section20">
-							<a href="<?php echo base_url(); ?>customerlist/All">
+							<a href="<?php echo base_url(); ?>customerList">
 								<div class="logo">
 									<i class="menu-icon fa fa-list"></i>
 								</div>
 								<div class="textModule">
-									Client List
+									Rent Lead List
 								</div>
 							</a>
 						</div>
 					</div>
 				<?php endif; ?>
-				<?php if (array_search("report_list", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+				<?php if (array_search("sale_customer", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
 					<div class="col-md-2 col-xs-6 custom-padding ">
 						<div class="col-md-12 section20">
-							<a href="<?php echo base_url(); ?>report_list">
+							<a href="<?php echo base_url(); ?>sale_customer">
+								<div class="logo">
+									<i class="menu-icon fa fa-male"></i>
+								</div>
+								<div class="textModule">
+									Sale Lead Entry
+								</div>
+							</a>
+						</div>
+					</div>
+				<?php endif; ?>
+				<?php if (array_search("sale_customerList", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+					<div class="col-md-2 col-xs-6 custom-padding ">
+						<div class="col-md-12 section20">
+							<a href="<?php echo base_url(); ?>sale_customerList">
 								<div class="logo">
 									<i class="menu-icon fa fa-list"></i>
 								</div>
 								<div class="textModule">
-									Report List
-								</div>
-							</a>
-						</div>
-					</div>
-				<?php endif; ?>
-				<?php if (array_search("type", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
-					<div class="col-md-2 col-xs-6 custom-padding ">
-						<div class="col-md-12 section20">
-							<a href="<?php echo base_url(); ?>type">
-								<div class="logo">
-									<i class="menu-icon fa fa-plus"></i>
-								</div>
-								<div class="textModule">
-									Type Entry
-								</div>
-							</a>
-						</div>
-					</div>
-				<?php endif; ?>
-
-				<?php if (array_search("source", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
-					<div class="col-md-2 col-xs-6 custom-padding ">
-						<div class="col-md-12 section20">
-							<a href="<?php echo base_url(); ?>source">
-								<div class="logo">
-									<i class="menu-icon fa fa-plus"></i>
-								</div>
-								<div class="textModule">
-									Source Entry
-								</div>
-							</a>
-						</div>
-					</div>
-				<?php endif; ?>
-
-				<?php if (array_search("area", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
-					<div class="col-md-2 col-xs-6 custom-padding ">
-						<div class="col-md-12 section20">
-							<a href="<?php echo base_url(); ?>area">
-								<div class="logo">
-									<i class="menu-icon fa fa-globe"></i>
-								</div>
-								<div class="textModule">
-									Area Entry
+									Sale Lead List
 								</div>
 							</a>
 						</div>

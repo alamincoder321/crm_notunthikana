@@ -43,22 +43,6 @@
 </style>
 
 <div id="propertyList">
-    <!-- <div class="row" style="margin: 0px; border-bottom: 1px solid gray; margin-bottom: 15px; padding-bottom: 3px;">
-        <div class="col-xs-12">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="">SearchType</label>
-                    <select style="padding: 1px 6px;width:80px;height:26px;">
-                        <option value="">All</option>
-                    </select>
-                </div>
-                <div class="form-group" style="margin-top: -1px;">
-                    <input type="button" value="Show Report" v-on:click="getProperty">
-                </div>
-            </form>
-        </div>
-    </div> -->
-
     <div class="row" style="display: none" v-bind:style="{display: properties.length > 0 ? '' : 'none'}">
         <div class="col-xs-12 form-inline">
             <div class="form-group">
@@ -115,15 +99,20 @@
                             <td>{{ row.percentage }}</td>
                             <td>{{ row.btob }}</td>
                             <td>
+                                <span v-show="row.Status == 'p'" class="badge badge-danger">Pending</span>
+                                <span v-show="row.Status == 'a'" class="badge badge-success">Rent Out</span>
+                            </td>
+                            <td>
                                 <?php if ($this->session->userdata('accountType') != 'u') { ?>
+                                    <button type="button" v-show="row.Status == 'p'" @click="statusUpdate(row)">RentOut</button>
                                     <a href="" :href="`/property_entry/${row.Property_SlNo}`" class="button edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 <?php } ?>
                                 <?php if ($this->session->userdata('accountType') == 'm' || $this->session->userdata('accountType') == 'a') { ?>
-                                    <button type="button" class="button" @click="deleteProperty(row.Property_SlNo)">
+                                    <a href="" class="button" @click.prevent="deleteProperty(row.Property_SlNo)">
                                         <i class="fa fa-trash"></i>
-                                    </button>
+                                    </a>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -367,6 +356,11 @@
                         align: 'center'
                     },
                     {
+                        label: 'Status',
+                        field: 'Status',
+                        align: 'center'
+                    },
+                    {
                         label: 'Action',
                         align: 'center',
                         filterable: false
@@ -383,8 +377,6 @@
             }
         },
         created() {
-            this.getFloors();
-            this.getCategory();
             this.getUsers();
             this.getProperty();
         },
@@ -398,17 +390,6 @@
                         this.users = res.data.filter(item => item.userId == this.userId || item.UserType == 'e');
                         this.assignUsers = res.data.filter(item => item.userId == this.userId || item.UserType == 'e');
                     }
-                })
-            },
-
-            getCategory() {
-                axios.get('/get_property_category').then(res => {
-                    this.categories = res.data;
-                })
-            },
-            getFloors() {
-                axios.get('/get_floor').then(res => {
-                    this.floors = res.data;
                 })
             },
 
@@ -429,6 +410,17 @@
                     alert(res.data.message)
                     this.getProperty();
                 })
+            },
+
+            statusUpdate(row) {
+                if (!confirm("Are you sure?")) return;
+                axios.post("/rent_status_update", row)
+                    .then(res => {
+                        alert(res.data.message);
+                        if (res.data.success) {
+                            this.getProperty();
+                        }
+                    })
             }
         }
     })

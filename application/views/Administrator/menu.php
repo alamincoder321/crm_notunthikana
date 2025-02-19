@@ -171,89 +171,38 @@ if ($module == 'dashboard' or $module == '') {
 			<li class="">
 				<a href="<?php echo base_url(); ?>customer">
 					<i class="menu-icon fa fa-male"></i>
-					<span class="menu-text"> Client Entry </span>
+					<span class="menu-text"> Rent Lead Entry </span>
 				</a>
 				<b class="arrow"></b>
 			</li>
 		<?php endif; ?>
 
 
-		<?php if (array_search("customerlist/All", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+		<?php if (array_search("customerList", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
 			<li class="">
-				<a href="<?php echo base_url(); ?>customerlist/All">
+				<a href="<?php echo base_url(); ?>customerList">
 					<i class="menu-icon fa fa-list"></i>
-					<span class="menu-text"> Client List </span>
+					<span class="menu-text"> Rent Lead List </span>
+				</a>
+				<b class="arrow"></b>
+			</li>
+		<?php endif; ?>
+		<?php if (array_search("sale_customer", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+			<li class="">
+				<a href="<?php echo base_url(); ?>sale_customer">
+					<i class="menu-icon fa fa-male"></i>
+					<span class="menu-text"> Sale Lead Entry </span>
 				</a>
 				<b class="arrow"></b>
 			</li>
 		<?php endif; ?>
 
-		<?php if (array_search("next_call_reminder", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+
+		<?php if (array_search("sale_customerList", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
 			<li class="">
-				<?php
-				$user_type =  $this->session->userdata("accountType");
-				$user_id = $this->session->userdata("userId");
-				$clause = "";
-				if ($user_type == 'u' || $user_type == 'e') {
-					$clause = " and user_id = '$user_id'";
-				}
-				$reminder = $this->db->query("select * from tbl_customer where status = 'a' and latest_call_date = ? $clause", date('Y-m-d'))->result();
-				?>
-				<a href="<?php echo base_url(); ?>next_call_reminder">
+				<a href="<?php echo base_url(); ?>sale_customerList">
 					<i class="menu-icon fa fa-list"></i>
-					<span class="menu-text"> Call Reminder
-						<i style="color: white; font-weight: 800; padding: 1px 11px; background: red; border-radius: 50px;"><?= count($reminder) ?></i>
-					</span>
-				</a>
-				<b class="arrow"></b>
-			</li>
-		<?php endif; ?>
-
-		<?php if (array_search("report_list", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
-			<li class="">
-				<a href="<?php echo base_url(); ?>report_list">
-					<i class="menu-icon fa fa-list"></i>
-					<span class="menu-text"> Report List </span>
-				</a>
-				<b class="arrow"></b>
-			</li>
-		<?php endif; ?>
-
-		<?php if (array_search("meeting_report", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
-			<li class="">
-				<a href="<?php echo base_url(); ?>meeting_report">
-					<i class="menu-icon fa fa-list"></i>
-					<span class="menu-text"> Meeting Report </span>
-				</a>
-				<b class="arrow"></b>
-			</li>
-		<?php endif; ?>
-
-		<?php if (array_search("type", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
-			<li class="">
-				<a href="<?php echo base_url(); ?>type">
-					<i class="menu-icon fa fa-plus"></i>
-					<span class="menu-text"> Stage Entry </span>
-				</a>
-				<b class="arrow"></b>
-			</li>
-		<?php endif; ?>
-
-		<?php if (array_search("source", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
-			<li class="">
-				<a href="<?php echo base_url(); ?>source">
-					<i class="menu-icon fa fa-plus"></i>
-					<span class="menu-text"> Source Entry </span>
-				</a>
-				<b class="arrow"></b>
-			</li>
-		<?php endif; ?>
-
-		<?php if (array_search("area", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
-			<li class="">
-				<a href="<?php echo base_url(); ?>area">
-					<i class="menu-icon fa fa-globe"></i>
-					<span class="menu-text"> Area Entry </span>
+					<span class="menu-text"> Sale Lead List </span>
 				</a>
 				<b class="arrow"></b>
 			</li>

@@ -143,8 +143,7 @@ class Property extends CI_Controller
             foreach ($propertyObj as $key => $val) {
                 $emptyVal = $val;
                 if (in_array($key, $validations) && $emptyVal == '') {
-                    $keyVal = strtoupper($key);
-                    $res = ['success' => false, 'message' => "{$keyVal} field is required"];
+                    $res = ['success' => false, 'message' => "{$key} field is required"];
                     echo json_encode($res);
                     exit;
                 }
@@ -157,6 +156,7 @@ class Property extends CI_Controller
 
             $property = (array)$propertyObj;
             $property['Status'] = 'p';
+            $property['user_id'] = $this->session->userdata("userId");
             $property['AddBy'] = $this->session->userdata("FullName");
             $property['AddTime'] = date('Y-m-d H:i:s');
             $property['branchId'] = $this->branchId;
@@ -203,8 +203,7 @@ class Property extends CI_Controller
             foreach ($propertyObj as $key => $val) {
                 $emptyVal = $val;
                 if (in_array($key, $validations) && $emptyVal == '') {
-                    $keyVal = strtoupper($key);
-                    $res = ['success' => false, 'message' => "{$keyVal} field is required"];
+                    $res = ['success' => false, 'message' => "{$key} field is required"];
                     echo json_encode($res);
                     exit;
                 }
@@ -259,5 +258,21 @@ class Property extends CI_Controller
         $data['title'] = "Property List";
         $data['content'] = $this->load->view('Administrator/property/propertyList', $data, TRUE);
         $this->load->view('Administrator/index', $data);
+    }
+
+    public function rentStatusUpdate()
+    {
+        $res = ['success' => false, 'message' => ''];
+        try {
+            $data = json_decode($this->input->raw_input_stream);
+
+            $this->db->set(['status' => 'a'])->where('Property_SlNo', $data->Property_SlNo)->update('tbl_property');
+
+            $res = ['success' => true, 'message' => 'Rent property status update successfully'];
+        } catch (Exception $ex) {
+            $res = ['success' => false, 'message' => $ex->getMessage()];
+        }
+
+        echo json_encode($res);
     }
 }

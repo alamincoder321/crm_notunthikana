@@ -1,5 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-class Customer extends CI_Controller
+class SaleCustomer extends CI_Controller
 {
 
 
@@ -22,10 +22,10 @@ class Customer extends CI_Controller
         if (!$access) {
             redirect(base_url());
         }
-        $data['title'] = "Rent Lead Entry";
+        $data['title'] = "Sale Lead Entry";
         $data['customerId'] = 0;
-        $data['Customer_Code'] = $this->mt->generateCustomerCode();
-        $data['content'] = $this->load->view('Administrator/add_customer', $data, TRUE);
+        $data['Customer_Code'] = $this->mt->generateSaleCustomerCode();
+        $data['content'] = $this->load->view('Administrator/add_sale_customer', $data, TRUE);
         $this->load->view('Administrator/index', $data);
     }
 
@@ -35,10 +35,10 @@ class Customer extends CI_Controller
         if (!$access) {
             redirect(base_url());
         }
-        $data['title'] = "Rent Lead Update";
+        $data['title'] = "Sale Lead Update";
         $data['customerId'] = $customerId;
-        $data['Customer_Code'] = $this->mt->generateCustomerCode();
-        $data['content'] = $this->load->view('Administrator/add_customer', $data, TRUE);
+        $data['Customer_Code'] = $this->mt->generateSaleCustomerCode();
+        $data['content'] = $this->load->view('Administrator/add_sale_customer', $data, TRUE);
         $this->load->view('Administrator/index', $data);
     }
 
@@ -48,8 +48,8 @@ class Customer extends CI_Controller
         if (!$access) {
             redirect(base_url());
         }
-        $data['title'] = "Rent Lead List";
-        $data['content'] = $this->load->view("Administrator/reports/customer_list", $data, true);
+        $data['title'] = "Sale Lead List";
+        $data['content'] = $this->load->view("Administrator/reports/sale_customer_list", $data, true);
         $this->load->view("Administrator/index", $data);
     }
 
@@ -75,27 +75,17 @@ class Customer extends CI_Controller
                 concat_ws(' - ', c.Customer_Code, c.Customer_Name, c.Customer_Mobile) as display_name,
                 z.Zone_Name,
                 sq.Sqft_Name,
-                b.Bed_Name,
-                ba.Bath_Name,
                 bu.Budget_Name,
-                m.month_name,
                 s.Status_Name,
                 cd.Condition_Name,
-                fm.Member_Name,
-                p.Parking_Name,
                 sr.Source_Name,
                 u.User_Name
-            from tbl_customer c
+            from tbl_sale_customer c
             left join tbl_zone z on z.Zone_SlNo = c.zone_id
             left join tbl_sqft sq on sq.Sqft_SlNo = c.sqft_id
-            left join tbl_bed b on b.Bed_SlNo = c.bed_id
-            left join tbl_bath ba on ba.Bath_SlNo = c.bath_id
             left join tbl_budget bu on bu.Budget_SlNo = c.budget_id
-            left join tbl_month m on m.month_id = c.month_id
             left join tbl_apt_status s on s.Status_SlNo = c.status_id
             left join tbl_condition cd on cd.Condition_SlNo = c.condition_id
-            left join tbl_family_member fm on fm.Member_SlNo = c.member_id
-            left join tbl_parking p on p.Parking_SlNo = c.parking_id
             left join tbl_source sr on sr.Source_SlNo = c.source_id
             left join tbl_user u on u.User_SlNo = c.user_id
             where c.status != 'd'
@@ -114,10 +104,7 @@ class Customer extends CI_Controller
             $validations = array(
                 'zone_id',
                 'sqft_id',
-                'bed_id',
-                'bath_id',
                 'budget_id',
-                'month_id',
                 'status_id',
                 'source_id',
                 'Customer_Name',
@@ -134,9 +121,9 @@ class Customer extends CI_Controller
                 }
             }
 
-            $customerCodeCount = $this->db->query("select * from tbl_customer where Customer_Code = ?", $customerObj->Customer_Code)->num_rows();
+            $customerCodeCount = $this->db->query("select * from tbl_sale_customer where Customer_Code = ?", $customerObj->Customer_Code)->num_rows();
             if ($customerCodeCount > 0) {
-                $customerObj->Customer_Code = $this->mt->generateCustomerCode($customerObj->Customer_Type);
+                $customerObj->Customer_Code = $this->mt->generateSaleCustomerCode($customerObj->Customer_Type);
             }
 
             if ($this->session->userdata('accountType') == 'm' || $this->session->userdata('accountType') == 'a') {
@@ -146,11 +133,11 @@ class Customer extends CI_Controller
             $customer = (array)$customerObj;
             unset($customer['Customer_SlNo']);
             unset($customer['Customer_Code']);
-            $customer["Customer_Code"] = $this->mt->generateCustomerCode();
+            $customer["Customer_Code"] = $this->mt->generateSaleCustomerCode();
             $customer["Customer_brunchid"] = $this->session->userdata("BRANCHid");
 
             $res_message = "";
-            $duplicateMobileQuery = $this->db->query("select * from tbl_customer where Customer_Mobile = ? and Customer_brunchid = ? and status != 'd' and Customer_Mobile != ''", [$customerObj->Customer_Mobile, $this->session->userdata("BRANCHid")]);
+            $duplicateMobileQuery = $this->db->query("select * from tbl_sale_customer where Customer_Mobile = ? and Customer_brunchid = ? and status != 'd' and Customer_Mobile != ''", [$customerObj->Customer_Mobile, $this->session->userdata("BRANCHid")]);
 
             if ($duplicateMobileQuery->num_rows() > 0) {
                 $res = ['success' => false, 'message' => 'Mobile Number Already Exists'];
@@ -161,11 +148,11 @@ class Customer extends CI_Controller
                 $customer["AddTime"] = date("Y-m-d H:i:s");
                 $customer["status"] = 'a';
 
-                $this->db->insert('tbl_customer', $customer);
-                $res_message = 'Rent Lead added successfully';
+                $this->db->insert('tbl_sale_customer', $customer);
+                $res_message = 'Sale Lead added successfully';
             }
 
-            $res = ['success' => true, 'message' => $res_message, 'customerCode' => $this->mt->generateCustomerCode()];
+            $res = ['success' => true, 'message' => $res_message, 'customerCode' => $this->mt->generateSaleCustomerCode()];
         } catch (Exception $ex) {
             $res = ['success' => false, 'message' => $ex->getMessage()];
         }
@@ -181,16 +168,13 @@ class Customer extends CI_Controller
             $validations = array(
                 'zone_id',
                 'sqft_id',
-                'bed_id',
-                'bath_id',
                 'budget_id',
-                'month_id',
                 'status_id',
                 'source_id',
                 'Customer_Name',
                 'Customer_Mobile'
             );
-
+            
             $customerId = $customerObj->Customer_SlNo;
             unset($customerObj->Customer_SlNo);
             foreach ($customerObj as $key => $val) {
@@ -202,7 +186,7 @@ class Customer extends CI_Controller
                 }
             }
 
-            $customerMobileCount = $this->db->query("select * from tbl_customer where Customer_Mobile = ? and Customer_Mobile != '' and Customer_SlNo != ? and Customer_brunchid = ? and status != 'd'", [$customerObj->Customer_Mobile, $customerId, $this->session->userdata("BRANCHid")])->num_rows();
+            $customerMobileCount = $this->db->query("select * from tbl_sale_customer where Customer_Mobile = ? and Customer_Mobile != '' and Customer_SlNo != ? and Customer_brunchid = ? and status != 'd'", [$customerObj->Customer_Mobile, $customerId, $this->session->userdata("BRANCHid")])->num_rows();
 
             if ($customerMobileCount > 0) {
                 $res = ['success' => false, 'message' => 'Mobile number already exists'];
@@ -216,12 +200,12 @@ class Customer extends CI_Controller
             $customer["UpdateBy"] = $this->session->userdata("FullName");
             $customer["UpdateTime"] = date("Y-m-d H:i:s");
 
-            $this->db->where('Customer_SlNo', $customerId)->update('tbl_customer', $customer);
+            $this->db->where('Customer_SlNo', $customerId)->update('tbl_sale_customer', $customer);
 
             $res = [
                 'success' => true,
-                'message' => 'Customer updated successfully',
-                'customerCode' => $this->mt->generateCustomerCode()
+                'message' => 'Sale Lead updated successfully',
+                'customerCode' => $this->mt->generateSaleCustomerCode()
             ];
         } catch (Exception $ex) {
             $res = ['success' => false, 'message' => $ex->getMessage()];
@@ -239,12 +223,12 @@ class Customer extends CI_Controller
                 'user_id' => $customerObj->user_id,
             );
 
-            $this->db->where('Customer_SlNo', $customerObj->Customer_SlNo)->update('tbl_customer', $customer);
+            $this->db->where('Customer_SlNo', $customerObj->Customer_SlNo)->update('tbl_sale_customer', $customer);
 
             $res = [
                 'success' => true,
-                'message' => 'Rent Lead updated successfully',
-                'customerCode' => $this->mt->generateCustomerCode()
+                'message' => 'Customer updated successfully',
+                'customerCode' => $this->mt->generateSaleCustomerCode()
             ];
         } catch (Exception $ex) {
             $res = ['success' => false, 'message' => $ex->getMessage()];
@@ -259,7 +243,7 @@ class Customer extends CI_Controller
         try {
             $data = json_decode($this->input->raw_input_stream);
 
-            $this->db->query("update tbl_customer set status = 'd' where Customer_SlNo = ?", $data->customerId);
+            $this->db->query("update tbl_sale_customer set status = 'd' where Customer_SlNo = ?", $data->customerId);
 
             $res = ['success' => true, 'message' => 'Customer deleted'];
         } catch (Exception $ex) {

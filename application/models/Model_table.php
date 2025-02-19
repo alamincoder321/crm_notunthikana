@@ -75,12 +75,25 @@ class Model_Table extends CI_Model
 
     public function generateCustomerCode()
     {
-        $customerCode = "CL00001";
+        $customerCode = "LR00001";
         $lastCustomer = $this->db->query("select c.* from tbl_customer c",);
         if ($lastCustomer->num_rows() != 0) {
             $newCustomerId = $lastCustomer->num_rows() + 1;
             $zeros = array('0', '00', '000', '0000');
-            $cusType = "CL";
+            $cusType = "LR";
+            $customerCode =  $cusType . (strlen($newCustomerId) > count($zeros) ? $newCustomerId : $zeros[count($zeros) - strlen($newCustomerId)] . $newCustomerId);
+        }
+
+        return $customerCode;
+    }
+    public function generateSaleCustomerCode()
+    {
+        $customerCode = "LS00001";
+        $lastCustomer = $this->db->query("select c.* from tbl_sale_customer c",);
+        if ($lastCustomer->num_rows() != 0) {
+            $newCustomerId = $lastCustomer->num_rows() + 1;
+            $zeros = array('0', '00', '000', '0000');
+            $cusType = "LS";
             $customerCode =  $cusType . (strlen($newCustomerId) > count($zeros) ? $newCustomerId : $zeros[count($zeros) - strlen($newCustomerId)] . $newCustomerId);
         }
 

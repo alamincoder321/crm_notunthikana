@@ -61,18 +61,14 @@
                             <td>{{ row.Zone_Name }}</td>
                             <td>{{ row.Customer_Address }}</td>
                             <td>{{ row.Sqft_Name }}</td>
-                            <td>{{ row.Bed_Name }}</td>
-                            <td>{{ row.Bath_Name }}</td>
+                            <td>{{ row.bedbath }}</td>
                             <td>{{ row.sbedbath }}</td>
                             <td>{{ row.Budget_Name }}</td>
                             <td>{{ row.floor }}</td>
-                            <td>{{ row.month_name }}</td>
                             <td>{{ row.Status_Name }}</td>
                             <td>{{ row.Condition_Name }}</td>
-                            <td>{{ row.Member_Name }}</td>
                             <td>{{ row.pet_status }}</td>
                             <td>{{ row.apt_face }}</td>
-                            <td>{{ row.parking }}</td>
                             <td>{{ row.profession }}</td>
                             <td>{{ row.living_at }}</td>
                             <td>{{ row.others }}</td>
@@ -167,17 +163,12 @@
                         field: 'Sqft_Name',
                         align: 'center'
                     },
-                    {
-                        label: 'Bed',
-                        field: 'Bed_Name',
-                        align: 'center'
-                    },
-                    {
-                        label: 'Bath',
-                        field: 'Bath_Name',
-                        align: 'center'
-                    },
 
+                    {
+                        label: 'Bed & Bath',
+                        field: 'sbedbath',
+                        align: 'center'
+                    },
                     {
                         label: 'S.Bed & S.Bath',
                         field: 'sbedbath',
@@ -194,11 +185,6 @@
                         align: 'center'
                     },
                     {
-                        label: 'Available Month',
-                        field: 'month_name',
-                        align: 'center'
-                    },
-                    {
                         label: 'Property_Status',
                         field: 'Status_Name',
                         align: 'center'
@@ -209,11 +195,6 @@
                         align: 'center'
                     },
                     {
-                        label: 'Family_Member',
-                        field: 'Member_Name',
-                        align: 'center'
-                    },
-                    {
                         label: 'Pet_Status',
                         field: 'pet_status',
                         align: 'center'
@@ -221,11 +202,6 @@
                     {
                         label: 'Apt. Face',
                         field: 'apt_face',
-                        align: 'center'
-                    },
-                    {
-                        label: 'Parking',
-                        field: 'Parking_Name',
                         align: 'center'
                     },
                     {
@@ -294,7 +270,7 @@
             },
 
             getCustomer() {
-                axios.post('/get_customers').then(res => {
+                axios.post('/get_sale_customers').then(res => {
                     this.customers = res.data.map((item, index) => {
                         item.sl = index + 1;
                         return item;
@@ -304,7 +280,7 @@
 
             deleteCustomer(rowId) {
                 if (!confirm("Are you sure?")) return;
-                axios.post('/delete_customer', {
+                axios.post('/delete_sale_customer', {
                     propertyId: rowId
                 }).then(res => {
                     alert(res.data.message)
@@ -325,7 +301,7 @@
                     Customer_SlNo: this.clientRow.Customer_SlNo,
                     user_id: this.selectedUser.User_SlNo,
                 }
-                axios.post('/assign_customer', filter)
+                axios.post('/assign_sale_customer', filter)
                     .then(res => {
                         alert(res.data.message);
                         this.getCustomers();

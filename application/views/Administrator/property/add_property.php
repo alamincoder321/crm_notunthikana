@@ -168,7 +168,7 @@
                                     <v-select :options="sqfts" style="margin: 0;" v-model="selectedSqft" label="Sqft_Name"></v-select>
                                 </div>
                                 <div style="width: 10%;">
-                                    <button type="button" onclick="window.open('/zone', '_blank')"><i class="fa fa-plus"></i></button>
+                                    <button type="button" onclick="window.open('/sqft', '_blank')"><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
                         </td>

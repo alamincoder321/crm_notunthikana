@@ -112,15 +112,20 @@
                             <td>{{ row.percentage }}</td>
                             <td>{{ row.fixed_price }}</td>
                             <td>
+                                <span v-show="row.Status == 'p'" class="badge badge-danger">Pending</span>
+                                <span v-show="row.Status == 'a'" class="badge badge-success">Sold Out</span>
+                            </td>
+                            <td>
                                 <?php if ($this->session->userdata('accountType') != 'u') { ?>
+                                    <button type="button" v-show="row.Status == 'p'" @click="statusUpdate(row)">SoldOut</button>
                                     <a href="" :href="`/sale_property/${row.Property_SlNo}`" class="button edit">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 <?php } ?>
                                 <?php if ($this->session->userdata('accountType') == 'm' || $this->session->userdata('accountType') == 'a') { ?>
-                                    <button type="button" class="button" @click="deleteProperty(row.Property_SlNo)">
+                                    <a href="" class="button" @click.prevent="deleteProperty(row.Property_SlNo)">
                                         <i class="fa fa-trash"></i>
-                                    </button>
+                                    </a>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -349,6 +354,11 @@
                         align: 'center'
                     },
                     {
+                        label: 'Status',
+                        field: 'Status',
+                        align: 'center'
+                    },
+                    {
                         label: 'Action',
                         align: 'center',
                         filterable: false
@@ -411,6 +421,17 @@
                     alert(res.data.message)
                     this.getProperty();
                 })
+            },
+
+            statusUpdate(row) {
+                if (!confirm("Are you sure?")) return;
+                axios.post("/sale_status_update", row)
+                    .then(res => {
+                        alert(res.data.message);
+                        if (res.data.success) {
+                            this.getProperty();
+                        }
+                    })
             }
         }
     })
