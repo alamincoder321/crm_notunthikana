@@ -368,11 +368,10 @@
 						}
 						this.resetForm();
 						this.customer.Customer_Code = r.customerCode;
-						this.getCustomers();
 					}
 				})
 			},
-			resetForm() {				
+			resetForm() {
 				this.customer = {
 					Customer_SlNo: 0,
 					Customer_Code: "",

@@ -54,15 +54,15 @@ $companyInfo = $this->db->query("select * from tbl_company c order by c.Company_
 
 
 
-$today_rent_lead = $this->db->query("select count(*) as count from tbl_customer where Status != 'd' and DATE_FORMAT(AddTime, '%Y-%m-%d') = ?", [date('Y-m-d')])->row()->count;
-$total_rent_lead = $this->db->query("select count(*) as count from tbl_customer where Status != 'd'")->row()->count;
-$today_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where Status != 'd' and DATE_FORMAT(AddTime, '%Y-%m-%d') = ?", [date('Y-m-d')])->row()->count;
-$total_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where Status != 'd'")->row()->count;
+$today_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status != 'd' and DATE_FORMAT(AddTime, '%Y-%m-%d') = ?", [date('Y-m-d')])->row()->count;
+$total_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status != 'd'")->row()->count;
+$today_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status != 'd' and DATE_FORMAT(AddTime, '%Y-%m-%d') = ?", [date('Y-m-d')])->row()->count;
+$total_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status != 'd'")->row()->count;
 
-$pending_rent_lead = $this->db->query("select count(*) as count from tbl_customer where Status = 'p'")->row()->count;
-$active_rent_lead = $this->db->query("select count(*) as count from tbl_customer where Status = 'a'")->row()->count;
-$pending_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where Status = 'p'")->row()->count;
-$active_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where Status = 'a'")->row()->count;
+$pending_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status = 'p'")->row()->count;
+$active_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status = 'a'")->row()->count;
+$pending_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status = 'p'")->row()->count;
+$active_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status = 'a'")->row()->count;
 
 //rent
 $call_rent_schedule = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and call_schedule is not null")->row()->count;
@@ -87,7 +87,10 @@ if ($module == 'dashboard' or $module == '') { ?>
 			<div class="col-md-10 col-md-offset-1">
 				<div class="row">
 					<div class="col-md-3">
-						<a style="text-decoration: none;" href="">
+						<?php
+						$date = date('Y-m-d');
+						?>
+						<a style="text-decoration: none;" href="/customerList/<?= $date; ?>">
 							<div class="card">
 								<strong>Today Rent Lead</strong>
 								<p><?= $today_rent_lead; ?></p>
@@ -95,7 +98,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/customerList">
 							<div class="card">
 								<strong>Total Rent Lead</strong>
 								<p><?= $total_rent_lead; ?></p>
@@ -103,7 +106,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/sale_customerList/<?= $date; ?>">
 							<div class="card">
 								<strong>Today Sale Lead</strong>
 								<p><?= $today_sale_lead; ?></p>
@@ -111,7 +114,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/sale_customerList">
 							<div class="card">
 								<strong>Total Sale Lead</strong>
 								<p><?= $total_sale_lead; ?></p>
@@ -121,7 +124,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 
 					<!-- report section -->
 					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/pending_customerList">
 							<div class="card">
 								<strong>Pending Rent Lead</strong>
 								<p><?= $pending_rent_lead; ?></p>
@@ -129,7 +132,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/active_customerList">
 							<div class="card">
 								<strong>Active Rent Lead</strong>
 								<p><?= $active_rent_lead; ?></p>
@@ -137,7 +140,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="pending_sale_customerList">
 							<div class="card">
 								<strong>Pending Sale Lead</strong>
 								<p><?= $pending_sale_lead; ?></p>
@@ -145,7 +148,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="active_sale_customerList">
 							<div class="card">
 								<strong>Active Sale Lead</strong>
 								<p><?= $active_sale_lead; ?></p>

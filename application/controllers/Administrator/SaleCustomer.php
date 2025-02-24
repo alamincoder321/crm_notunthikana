@@ -42,31 +42,61 @@ class SaleCustomer extends CI_Controller
         $this->load->view('Administrator/index', $data);
     }
 
-    public function customerList()
+    public function customerList($date = '')
     {
         $access = $this->mt->userAccess();
         if (!$access) {
             redirect(base_url());
         }
         $data['title'] = "Sale Lead List";
+        $data['date'] = $date;
+        $data['status'] = '';
         $data['content'] = $this->load->view("Administrator/reports/sale_customer_list", $data, true);
+        $this->load->view("Administrator/index", $data);
+    }
+
+    public function pendingcustomerList()
+    {
+        $access = $this->mt->userAccess();
+        if (!$access) {
+            redirect(base_url());
+        }
+        $data['title'] = "Pending Rent Lead List";
+        $data['status'] = 'p';
+        $data['date'] = '';
+        $data['content'] = $this->load->view("Administrator/reports/customer_list", $data, true);
+        $this->load->view("Administrator/index", $data);
+    }
+    public function activecustomerList()
+    {
+        $access = $this->mt->userAccess();
+        if (!$access) {
+            redirect(base_url());
+        }
+        $data['title'] = "Active Rent Lead List";
+        $data['status'] = 'a';
+        $data['date'] = '';
+        $data['content'] = $this->load->view("Administrator/reports/customer_list", $data, true);
         $this->load->view("Administrator/index", $data);
     }
 
     public function getCustomers()
     {
         $data = json_decode($this->input->raw_input_stream);
-
-        $order_by = " order by c.Customer_SlNo desc";
-
         $clauses = "";
         if ($this->session->userdata('accountType') == 'u') {
             $userId = $this->session->userdata('userId');
             $clauses .= " and c.user_id = '$userId'";
         }
-
         if (isset($data->customerId) && $data->customerId != null) {
             $clauses .= " and c.Customer_SlNo = '$data->customerId'";
+        }
+        $status = " and c.status != 'd'";
+        if (isset($data->status) && $data->status != null) {
+            $status = " and c.status = '$data->status'";
+        }
+        if ((isset($data->dateFrom) && $data->dateFrom != null) && (isset($data->dateTo) && $data->dateTo != null)) {
+            $clauses .= " and DATE_FORMAT(c.AddTime, '%Y-%m-%d') between '$data->dateFrom' and '$data->dateTo'";
         }
 
         $customers = $this->db->query("
@@ -88,9 +118,10 @@ class SaleCustomer extends CI_Controller
             left join tbl_condition cd on cd.Condition_SlNo = c.condition_id
             left join tbl_source sr on sr.Source_SlNo = c.source_id
             left join tbl_user u on u.User_SlNo = c.user_id
-            where c.status != 'd'
+            where 1 = 1
+            $status
             $clauses
-            $order_by
+            order by c.Customer_SlNo desc
         ", $this->session->userdata('BRANCHid'))->result();
         echo json_encode($customers);
     }

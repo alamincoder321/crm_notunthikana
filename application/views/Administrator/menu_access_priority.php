@@ -38,8 +38,12 @@
                 <ul ref="sales">
                     <li><input type="checkbox" class="access" value="customer" v-model="access"> Rent Client Entry</li>
                     <li><input type="checkbox" class="access" value="customerList" v-model="access"> Rent Client List</li>
+                    <li><input type="checkbox" class="access" value="pending_customerList" v-model="access"> Pending Rent Client List</li>
+                    <li><input type="checkbox" class="access" value="active_customerList" v-model="access"> Active Rent Client List</li>
                     <li><input type="checkbox" class="access" value="sale_customer" v-model="access"> Sale Client Entry</li>
                     <li><input type="checkbox" class="access" value="sale_customerList" v-model="access"> Sale Client List</li>
+                    <li><input type="checkbox" class="access" value="pending_sale_customerList" v-model="access"> Pending Sale Client List</li>
+                    <li><input type="checkbox" class="access" value="active_sale_customerList" v-model="access"> Active Sale Client List</li>
                 </ul>
             </div>
             <div class="group">

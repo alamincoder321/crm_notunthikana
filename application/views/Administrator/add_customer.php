@@ -472,7 +472,6 @@
 						}
 						this.resetForm();
 						this.customer.Customer_Code = r.customerCode;
-						this.getCustomers();
 					}
 				})
 			},

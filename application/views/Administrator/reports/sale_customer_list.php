@@ -43,7 +43,7 @@
 </style>
 
 <div id="propertyList">
-    <div class="row" style="display: none" v-bind:style="{display: customers.length > 0 ? '' : 'none'}">
+    <div class="row">
         <div class="col-xs-12 form-inline">
             <div class="form-group">
                 <label for="filter" class="sr-only">Filter</label>
@@ -76,8 +76,8 @@
                             <td>{{ row.AddBy }}</td>
                             <td>{{ row.User_Name }}</td>
                             <td>
-                                <span v-show="row.Status == 'p'" class="badge badge-danger">Pending</span>
-                                <span v-show="row.Status == 'a'" class="badge badge-success">Approved</span>
+                                <span v-show="row.status == 'p'" class="badge badge-danger">Pending</span>
+                                <span v-show="row.status == 'a'" class="badge badge-success">Approved</span>
                             </td>
                             <td>
                                 <a href="" :href="`/sale_report/${row.Customer_SlNo}`" class="button edit">
@@ -267,6 +267,8 @@
                 clientRow: {},
                 users: [],
                 selectedUser: null,
+                date: "<?= $date ?>",
+                status: "<?= $status ?>",
                 userType: '<?php echo $this->session->userdata("accountType"); ?>',
                 userId: '<?php echo $this->session->userdata("userId"); ?>',
             }
@@ -289,7 +291,12 @@
             },
 
             getCustomer() {
-                axios.post('/get_sale_customers').then(res => {
+                let filter = {
+                    dateFrom: this.date,
+                    dateTo: this.date,
+                    status: this.status
+                };
+                axios.post('/get_sale_customers', filter).then(res => {
                     this.customers = res.data.map((item, index) => {
                         item.sl = index + 1;
                         return item;

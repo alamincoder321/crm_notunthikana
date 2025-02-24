@@ -30,7 +30,11 @@ class Reports extends CI_Controller
             $clauses .= " and rrp.customer_id = '$data->customerId'";
         }
         $query = $this->db
-            ->query("select rrp.* from tbl_rent_report rrp where rrp.Status != 'd' $clauses")
+            ->query("select rrp.*,
+                c.Customer_Name 
+                from tbl_rent_report rrp
+                left join tbl_customer c on c.Customer_SlNo = rrp.customer_id 
+                where rrp.Status != 'd' $clauses")
             ->result();
 
         echo json_encode($query);
@@ -156,26 +160,26 @@ class Reports extends CI_Controller
         echo json_encode($res);
     }
 
-    // public function updateRentReport()
-    // {
-    //     $data = json_decode($this->input->raw_input_stream);
-    //     $id = $data->id;
-
-    //     $res = ['status' => false, 'message' => ''];
-    //     try {
-    //         $report = (array)$data;
-    //         unset($report['id']);
-    //         $report["user_id"] = $this->session->userdata("userId");
-    //         $report["AddBy"] = $this->session->userdata("FullName");
-    //         $report["AddTime"] = date("Y-m-d H:i:s");
-    //         $report["branchId"] = $this->session->userdata("BRANCHid");
-
-    //         $this->db->where('id', $id)->update("tbl_rent_report", $report);
-    //         $res = ['status' => true, 'message' => 'Follow up message update successfully'];
-    //     } catch (\Throwable $th) {
-    //         $res = ['status' => false, 'message' => $th->getMessage()];
-    //     }
-
-    //     echo json_encode($res);
-    // }
+    public function rentReportList()
+    {
+        $access = $this->mt->userAccess();
+        if (!$access) {
+            redirect(base_url());
+        }
+        $data['title'] = "Rent Report List";
+        $data['status'] = '';
+        $data['content'] = $this->load->view("Administrator/reports/rent_report_list", $data, true);
+        $this->load->view("Administrator/index", $data);
+    }
+    public function callrentReportList()
+    {
+        $access = $this->mt->userAccess();
+        if (!$access) {
+            redirect(base_url());
+        }
+        $data['title'] = "Rent Report List";
+        $data['status'] = '';
+        $data['content'] = $this->load->view("Administrator/reports/rent_report_list", $data, true);
+        $this->load->view("Administrator/index", $data);
+    }
 }
