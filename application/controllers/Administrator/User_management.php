@@ -83,7 +83,7 @@ class User_management extends CI_Controller
             "FullName"      => $this->input->post('txtFirstName', TRUE),
             "UserEmail"     => $this->input->post('user_email', TRUE),
             "Brunch_ID"     => $this->input->post('Brunch', TRUE),
-            "employeeId"    => !empty($this->input->post('employeeId', TRUE)) ? $this->input->post('employeeId', TRUE) : NULL,
+            "employeeId"    =>  NULL,
             "userBrunch_id" => $this->input->post('Brunch', TRUE),
             "User_Password" => md5($this->input->post('rePassword', TRUE)),
             "UserType"      => $this->input->post('type', TRUE),
@@ -138,7 +138,7 @@ class User_management extends CI_Controller
                 "FullName"      => $this->input->post('txtFirstName', TRUE),
                 "UserEmail"     => $this->input->post('user_email', TRUE),
                 "Brunch_ID"     => $this->input->post('Brunch', TRUE),
-                "employeeId"    => !empty($this->input->post('employeeId', TRUE)) ? $this->input->post('employeeId', TRUE) : NULL,
+                "employeeId"    => NULL,
                 "userBrunch_id" => $this->input->post('Brunch', TRUE),
                 "User_Password" => md5($this->input->post('rePassword', TRUE)),
                 "UserType"      => $this->input->post('type', TRUE),
@@ -152,12 +152,11 @@ class User_management extends CI_Controller
                 "FullName"      => $this->input->post('txtFirstName', TRUE),
                 "UserEmail"     => $this->input->post('user_email', TRUE),
                 "userBrunch_id" => $this->input->post('Brunch', TRUE),
-                "employeeId"    => !empty($this->input->post('employeeId', TRUE)) ? $this->input->post('employeeId', TRUE) : NULL,
+                "employeeId"    => NULL,
                 "Brunch_ID"     => $this->input->post('Brunch', TRUE),
                 "UserType"      => $this->input->post('type', TRUE),
                 "userId"        => $this->session->userdata('userId'),
                 "AddTime"       => date('Y-m-d H:i:s')
-                //"User_Password"             => md5($this->input->post('rePassword',TRUE)),
             );
             $this->mt->update_data("tbl_user", $data, $id, $fld);
         }

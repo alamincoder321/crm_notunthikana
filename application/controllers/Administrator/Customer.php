@@ -159,7 +159,7 @@ class Customer extends CI_Controller
             } else {
                 $customer["AddBy"] = $this->session->userdata("FullName");
                 $customer["AddTime"] = date("Y-m-d H:i:s");
-                $customer["status"] = 'a';
+                $customer["status"] = 'p';
 
                 $this->db->insert('tbl_customer', $customer);
                 $res_message = 'Rent Lead added successfully';

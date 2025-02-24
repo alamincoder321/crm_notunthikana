@@ -31,23 +31,6 @@ $BRANCHid = $this->session->userdata('BRANCHid');
                     </div>
                 </div>
 
-                <!-- <div class="form-group">
-                    <label class="col-md-4 control-label" for="Brunch"> Select Branch </label>
-                    <label class="col-md-1 control-label">:</label>
-                    <div class="col-md-6">
-                        <select class="chosen-select form-control" name="Brunch" id="Brunch" data-placeholder="Choose a Brunch...">
-                            <option value="<?php echo $selected->userBrunch_id; ?>"><?php echo $selected->Brunch_name; ?></option>
-                            <?php
-                            $sql = $this->db->query("SELECT * FROM tbl_brunch order by Brunch_name asc ");
-                            $row = $sql->result();
-                            foreach ($row as $row) { ?>
-                                <option value="<?php echo $row->brunch_id; ?>"><?php echo $row->Brunch_name; ?></option>
-                            <?php } ?>
-                        </select>
-                        <div id="brand_" class="col-md-12"></div>
-                    </div>
-                </div> -->
-
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="type"> User Type </label>
                     <label class="col-md-1 control-label">:</label>
@@ -60,23 +43,6 @@ $BRANCHid = $this->session->userdata('BRANCHid');
                             <option value="u" <?= ($selected->UserType == 'u') ? 'selected' : false; ?>>User</option>
                         </select>
                         <div id="brand_" class="col-md-12"></div>
-                    </div>
-                </div>
-
-                <?php
-                $employees = $this->db->query("select * from tbl_employee where status = 'a'")->result();
-                ?>
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="employeeId"> Hunter </label>
-                    <label class="col-md-1 control-label">:</label>
-                    <div class="col-md-6">
-                        <select style="padding:0px 2px;" class="form-control" name="employeeId" id="employeeId">
-                            <option value="">Select Hunter</option>
-                            <?php foreach ($employees as $item) { ?>
-                                <option <?= $selected->employeeId == $item->Employee_SlNo ? 'selected' : ""; ?> value="<?= $item->Employee_SlNo; ?>"><?= $item->Employee_Name; ?></option>
-                            <?php } ?>
-                        </select>
-                        <div id="employeeId" class="col-md-12"></div>
                     </div>
                 </div>
             </div>
@@ -173,11 +139,11 @@ $BRANCHid = $this->session->userdata('BRANCHid');
                     <tbody>
                         <?php
                         $clauses = "";
-						if ($this->session->userdata('accountType') == 'e' || $this->session->userdata('accountType') == 'u') {
-							$userId = $this->session->userdata('userId');
-							$clauses .= " and u.User_SlNo != 1";
-							$clauses .= " and u.userId = '$userId'";
-						}
+                        if ($this->session->userdata('accountType') == 'e' || $this->session->userdata('accountType') == 'u') {
+                            $userId = $this->session->userdata('userId');
+                            $clauses .= " and u.User_SlNo != 1";
+                            $clauses .= " and u.userId = '$userId'";
+                        }
                         $query = $this->db->query("SELECT
 													u.User_SlNo,
 													u.User_ID,
@@ -188,11 +154,9 @@ $BRANCHid = $this->session->userdata('BRANCHid');
 													u.UserType,
 													u.status AS userstatus,
 													br.brunch_id,
-													br.Brunch_name,
-													au.User_Name as underLeading
+													br.Brunch_name
 												FROM tbl_user u
 												LEFT JOIN tbl_brunch br ON br.brunch_id = u.userBrunch_id
-												INNER JOIN tbl_user au ON au.User_SlNo = u.userId 
 												WHERE 1 = 1 $clauses");
                         $results = $query->result();
                         foreach ($results as $key => $row) {
@@ -233,8 +197,6 @@ $BRANCHid = $this->session->userdata('BRANCHid');
                                         </span>
                                     <?php } ?>
                                 </td>
-
-                                <td><?php echo $row->underLeading; ?></td>
 
                                 <td>
                                     <div class="hidden-md hidden-md action-buttons">
@@ -334,14 +296,6 @@ $BRANCHid = $this->session->userdata('BRANCHid');
         } else {
             $("#user_email").css("border-color", "green");
         }
-
-        // var Brunch= $("#Brunch").val();
-        // if(Brunch==""){
-        //     $("#Brunch").css("border-color","red");
-        //     return false;
-        // }else{
-        //     $("#Brunch").css("border-color","green");
-        // }
         var type = $("#type").val();
         if (type == "") {
             $("#type").css("border-color", "red");
@@ -349,17 +303,11 @@ $BRANCHid = $this->session->userdata('BRANCHid');
         } else {
             $("#type").css("border-color", "green");
         }
-        var employeeId = $("#employeeId").val();
-		if (employeeId == "") {
-			$("#employeeId").css("border-color", "red");
-			// return false;
-		} else {
-			$("#employeeId").css("border-color", "green");
-		}
+
         var id = $("#id").val();
         var oldpassword = $("#oldpassword").val();
 
-        var inputdata = 'employeeId=' + employeeId + '&id=' + id + '&username=' + username + '&user_email=' + user_email + '&rePassword=' + rePassword + '&txtFirstName=' + txtFirstName + '&Brunch=' + 1 + '&type=' + type + '&oldpassword=' + oldpassword;
+        var inputdata = 'id=' + id + '&username=' + username + '&user_email=' + user_email + '&rePassword=' + rePassword + '&txtFirstName=' + txtFirstName + '&Brunch=' + 1 + '&type=' + type + '&oldpassword=' + oldpassword;
         var urldata = "<?php echo base_url(); ?>userUpdate";
         $.ajax({
             type: "POST",

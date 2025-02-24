@@ -36,57 +36,52 @@
             <div class="group">
                 <input type="checkbox" id="sales" class="group-head" @click="onClickGroupHeads"> <strong>Client Management</strong>
                 <ul ref="sales">
-                    <li><input type="checkbox" class="access" value="customer" v-model="access"> Client Entry</li>
-                    <li><input type="checkbox" class="access" value="customerlist/All" v-model="access"> Client List</li>
-                    <li><input type="checkbox" class="access" value="report_entry" v-model="access"> Report Entry</li>
-                    <li><input type="checkbox" class="access" value="report_list" v-model="access"> Report List</li>
-                    <li><input type="checkbox" class="access" value="next_call_reminder" v-model="access"> Call Reminder </li>
-                    <li><input type="checkbox" class="access" value="meeting_reminder" v-model="access"> Meeting Reminder</li>
-                    <li><input type="checkbox" class="access" value="meeting_report" v-model="access"> Meeting Report</li>
-                    <li><input type="checkbox" class="access" value="area" v-model="access"> Add Area</li>
-                    <li><input type="checkbox" class="access" value="source" v-model="access"> Add Source</li>
-                    <li><input type="checkbox" class="access" value="type" v-model="access"> Add Client Stage</li>
-                    <li><input type="checkbox" class="access" value="category" v-model="access"> Add Category</li>
-                    <li><input type="checkbox" class="access" value="sms" v-model="access"> Send SMS</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="group">
-                <input type="checkbox" id="land" class="group-head" @click="onClickGroupHeads"> <strong>Land Management</strong>
-                <ul ref="land">
-                    <li><input type="checkbox" class="access" value="land_entry" v-model="access"> Land Entry </li>
-                    <li><input type="checkbox" class="access" value="landRecord" v-model="access"> Land Record </li>
+                    <li><input type="checkbox" class="access" value="customer" v-model="access"> Rent Client Entry</li>
+                    <li><input type="checkbox" class="access" value="customerList" v-model="access"> Rent Client List</li>
+                    <li><input type="checkbox" class="access" value="sale_customer" v-model="access"> Sale Client Entry</li>
+                    <li><input type="checkbox" class="access" value="sale_customerList" v-model="access"> Sale Client List</li>
                 </ul>
             </div>
             <div class="group">
                 <input type="checkbox" id="property" class="group-head" @click="onClickGroupHeads"> <strong>Property Management</strong>
                 <ul ref="property">
-                    <li><input type="checkbox" class="access" value="property_entry" v-model="access"> Property Entry </li>
-                    <li><input type="checkbox" class="access" value="property_list" v-model="access"> Property List </li>
-                    <li><input type="checkbox" class="access" value="property_report_list" v-model="access"> Property Report List </li>
-                    <li><input type="checkbox" class="access" value="property_report_reminder" v-model="access"> Property Report Reminder</li>
-                    <li><input type="checkbox" class="access" value="popular_property" v-model="access"> Popular Property</li>
-                    <li><input type="checkbox" class="access" value="floor" v-model="access"> Floor Entry </li>
-                    <li><input type="checkbox" class="access" value="propertyType" v-model="access"> Property Type Entry </li>
-                    <li><input type="checkbox" class="access" value="purpose" v-model="access"> Purpose Entry </li>
-                    <li><input type="checkbox" class="access" value="property_category" v-model="access"> Property Category Entry </li>
-                    <li><input type="checkbox" class="access" value="block" v-model="access"> Block Entry </li>
-                    <li><input type="checkbox" class="access" value="lift" v-model="access"> Lift Entry </li>
-                    <li><input type="checkbox" class="access" value="building_height" v-model="access"> Building Height Entry </li>
-                    <li><input type="checkbox" class="access" value="occupancy" v-model="access"> Occupancy Entry </li>
-                    <li><input type="checkbox" class="access" value="viewing_availability" v-model="access"> Availability Entry </li>
+                    <li><input type="checkbox" class="access" value="property_entry" v-model="access"> Rent Property Entry </li>
+                    <li><input type="checkbox" class="access" value="property_list" v-model="access"> Rent Property List </li>
+                    <li><input type="checkbox" class="access" value="sale_property" v-model="access"> Sale Property Entry </li>
+                    <li><input type="checkbox" class="access" value="sale_property_list" v-model="access"> Sale Property List </li>
                 </ul>
             </div>
         </div>
         <div class="col-md-3">
             <div class="group">
-                <input type="checkbox" id="activity" class="group-head" @click="onClickGroupHeads"> <strong>Activity Management</strong>
-                <ul ref="activity">
-                    <li><input type="checkbox" class="access" value="activity_entry" v-model="access"> Activity Entry </li>
-                    <li><input type="checkbox" class="access" value="activity_report" v-model="access"> Activity Report </li>
+                <input type="checkbox" id="property" class="group-head" @click="onClickGroupHeads"> <strong>Common Section</strong>
+                <ul ref="property">
+                    <li><input type="checkbox" class="access" value="property_category" v-model="access"> Category Entry </li>
+                    <li><input type="checkbox" class="access" value="sqft" v-model="access"> Sqft Entry </li>
+                    <li><input type="checkbox" class="access" value="zone" v-model="access"> Zone Entry </li>
+                    <li><input type="checkbox" class="access" value="floor" v-model="access"> Floor Entry </li>
+                    <li><input type="checkbox" class="access" value="gas" v-model="access"> Gas Entry </li>
+                    <li><input type="checkbox" class="access" value="lift" v-model="access"> Lift Entry </li>
+                    <li><input type="checkbox" class="access" value="bath" v-model="access"> Generator Entry </li>
+                    <li><input type="checkbox" class="access" value="bed" v-model="access"> Bed Entry </li>
+                    <li><input type="checkbox" class="access" value="sbed" v-model="access"> S.Bed Entry </li>
+                    <li><input type="checkbox" class="access" value="bath" v-model="access"> Bath Entry </li>
+                    <li><input type="checkbox" class="access" value="sbath" v-model="access"> S.Bath Entry </li>
+                    <li><input type="checkbox" class="access" value="drawing" v-model="access"> Drawing Entry </li>
+                    <li><input type="checkbox" class="access" value="balcony" v-model="access"> Balcony Entry </li>
+                    <li><input type="checkbox" class="access" value="apt_face" v-model="access"> Apt. Face Entry </li>
+                    <li><input type="checkbox" class="access" value="apt_type" v-model="access"> Apt. Type Entry </li>
+                    <li><input type="checkbox" class="access" value="apt_status" v-model="access"> Apt. Status Entry </li>
+                    <li><input type="checkbox" class="access" value="budget" v-model="access"> Budget Entry </li>
+                    <li><input type="checkbox" class="access" value="month" v-model="access"> Month Entry </li>
+                    <li><input type="checkbox" class="access" value="condition" v-model="access"> Condition Entry </li>
+                    <li><input type="checkbox" class="access" value="member" v-model="access"> Member Entry </li>
+                    <li><input type="checkbox" class="access" value="parking" v-model="access"> Parking Entry </li>
+                    <li><input type="checkbox" class="access" value="source" v-model="access"> Source Entry </li>
                 </ul>
             </div>
+        </div>
+        <div class="col-md-3">
             <div class="group">
                 <input type="checkbox" id="hrPayroll" class="group-head" @click="onClickGroupHeads"> <strong>HR & Payroll</strong>
                 <ul ref="hrPayroll">
@@ -101,7 +96,9 @@
                     <li><input type="checkbox" class="access" value="salary_payment_report" v-model="access"> Salary Payment Report</li>
                 </ul>
             </div>
-
+            <div class="text-right">
+                <button class="btn btn-success" @click="addUserAccess">Save</button>
+            </div>
         </div>
 
         <div class="col-md-3">
@@ -109,19 +106,17 @@
                 <input type="checkbox" id="accountsReports" class="group-head" @click="onClickGroupHeads"> <strong>User Management</strong>
                 <ul ref="accountsReports">
                     <li><input type="checkbox" class="access" value="user" v-model="access"> User</li>
-                    <li><input type="checkbox" class="access" value="user_activity" v-model="access">User Activity</li>
-                    <li><input type="checkbox" class="access" value="notice" v-model="access"> Notice </li>
-                    <li><input type="checkbox" class="access" value="graph" v-model="access"> Business View </li>
+                    <li><input type="checkbox" class="access" value="user_activity" v-model="access"> User Activity</li>
                     <li><input type="checkbox" class="access" value="companyProfile" v-model="access"> companyProfile </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-12 text-right">
             <button class="btn btn-success" @click="addUserAccess">Save</button>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <script src="<?php echo base_url(); ?>assets/js/vue/vue.min.js"></script>

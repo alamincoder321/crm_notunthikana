@@ -1,5 +1,5 @@
 <?php $this->load->view('Administrator/dashboard_style'); ?>
-<style>
+<style scoped>
 	.module-title {
 		text-align: center !important;
 		font-size: 18px !important;
@@ -10,6 +10,30 @@
 	.module-title span {
 		font-size: 18px !important;
 		font-weight: bold;
+	}
+
+	.card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 130px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		text-align: center;
+		box-sizing: border-box;
+		padding: 8px 5px;
+	}
+
+	.card strong {
+		font-size: 22px;
+		color: #000;
+	}
+
+	.card p {
+		margin: 0;
+		font-size: 22px;
+		color: #000;
 	}
 </style>
 <?php
@@ -29,86 +53,176 @@ if ($userAccessQuery->num_rows() != 0) {
 $companyInfo = $this->db->query("select * from tbl_company c order by c.Company_SlNo desc limit 1")->row();
 
 
+
+$today_rent_lead = $this->db->query("select count(*) as count from tbl_customer where Status != 'd' and DATE_FORMAT(AddTime, '%Y-%m-%d') = ?", [date('Y-m-d')])->row()->count;
+$total_rent_lead = $this->db->query("select count(*) as count from tbl_customer where Status != 'd'")->row()->count;
+$today_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where Status != 'd' and DATE_FORMAT(AddTime, '%Y-%m-%d') = ?", [date('Y-m-d')])->row()->count;
+$total_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where Status != 'd'")->row()->count;
+
+$pending_rent_lead = $this->db->query("select count(*) as count from tbl_customer where Status = 'p'")->row()->count;
+$active_rent_lead = $this->db->query("select count(*) as count from tbl_customer where Status = 'a'")->row()->count;
+$pending_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where Status = 'p'")->row()->count;
+$active_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where Status = 'a'")->row()->count;
+
+//rent
+$call_rent_schedule = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and call_schedule is not null")->row()->count;
+$visit_rent_schedule = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and visit_schedule is not null")->row()->count;
+$reject_rent_report = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and report_status = 'j'")->row()->count;
+$success_rent_report = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and report_status = 'a'")->row()->count;
+//sale
+$call_sale_schedule = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and call_schedule is not null")->row()->count;
+$visit_sale_schedule = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and visit_schedule is not null")->row()->count;
+$reject_sale_report = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and report_status = 'j'")->row()->count;
+$success_sale_report = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and report_status = 'a'")->row()->count;
+
+
+
 $module = $this->session->userdata('module');
 if ($module == 'dashboard' or $module == '') { ?>
 	<div class="row">
 		<div class="col-md-12 col-xs-12">
-			<!-- Header Logo -->
 			<div class="col-md-12 header" style="height: 130px;box-shadow:none;">
-				<!-- style="border-radius: 20px;border: 1px solid #007ebb;box-shadow: 0px 5px 0px 0px #007ebb;" -->
 				<img src="<?php echo base_url(); ?>assets/images/headerbg.jpg" style="border-radius: 20px;border: 1px solid #007ebb;box-shadow: 0px 5px 0px 0px #007ebb;" class="img img-responsive center-block">
 			</div>
 			<div class="col-md-10 col-md-offset-1">
-
-				<div class="col-md-3 col-xs-6 section4">
-					<div class="col-md-12 section122" style="background-color:#e6e6ff;" onmouseover="this.style.background = '#b9b9ff'" onmouseout="this.style.background = '#e6e6ff'">
-						<a href="<?php echo base_url(); ?>module/propertyManagement">
-							<div class="logo">
-								<i class="fa fa-university"></i>
-							</div>
-							<div class="textModule">
-								Property Management
+				<div class="row">
+					<div class="col-md-3">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Today Rent Lead</strong>
+								<p><?= $today_rent_lead; ?></p>
 							</div>
 						</a>
 					</div>
-				</div>
-
-				<div class="col-md-3 col-xs-6 section4">
-					<div class="col-md-12 section122" style="background-color:#e1e1ff;" onmouseover="this.style.background = '#d2d2ff'" onmouseout="this.style.background = '#e1e1ff'">
-						<a href="<?php echo base_url(); ?>module/ClientManagement">
-							<div class="logo">
-								<i class="fa fa-male"></i>
-							</div>
-							<div class="textModule">
-								Client Management
+					<div class="col-md-3">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Total Rent Lead</strong>
+								<p><?= $total_rent_lead; ?></p>
 							</div>
 						</a>
 					</div>
-				</div>
-
-				<!-- module/AccountsModule -->
-				<div class="col-md-3 col-xs-6 section4">
-					<div class="col-md-12 section122" style="background-color:#A7ECFB;" onmouseover="this.style.background = '#85e6fa'" onmouseout="this.style.background = '#A7ECFB'">
-						<a href="<?php echo base_url(); ?>module/UserManagement">
-							<div class="logo">
-								<i class="fa fa-user-plus"></i>
-							</div>
-							<div class="textModule">
-								User Management
+					<div class="col-md-3">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Today Sale Lead</strong>
+								<p><?= $today_sale_lead; ?></p>
 							</div>
 						</a>
 					</div>
-				</div>
-
-				<!-- module/HRPayroll -->
-				<div class="col-md-3 col-xs-6 section4">
-					<div class="col-md-12 section122" style="background-color:#ecffd9;" onmouseover="this.style.background = '#cfff9f'" onmouseout="this.style.background = '#ecffd9'">
-						<a href="<?php echo base_url(); ?>module/HRPayroll">
-							<div class="logo">
-								<i class="fa fa-users"></i>
-							</div>
-							<div class="textModule">
-								Human Resources
+					<div class="col-md-3">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Total Sale Lead</strong>
+								<p><?= $total_sale_lead; ?></p>
 							</div>
 						</a>
 					</div>
-				</div>
 
-				<div class="col-md-3 col-xs-6 section4">
-					<div class="col-md-12 section122" style="background-color:#d8ebeb;" onmouseover="this.style.background = '#bddddd'" onmouseout="this.style.background = '#d8ebeb'">
-						<a href="<?php echo base_url(); ?>graph">
-							<div class="logo">
-								<i class="fa fa-bar-chart"></i>
+					<!-- report section -->
+					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Pending Rent Lead</strong>
+								<p><?= $pending_rent_lead; ?></p>
 							</div>
-							<div class="textModule">
-								Business View
+						</a>
+					</div>
+					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Active Rent Lead</strong>
+								<p><?= $active_rent_lead; ?></p>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Pending Sale Lead</strong>
+								<p><?= $pending_sale_lead; ?></p>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Active Sale Lead</strong>
+								<p><?= $active_sale_lead; ?></p>
+							</div>
+						</a>
+					</div>
+
+					<!-- report section -->
+					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Rent Call Schedule</strong>
+								<p><?= $call_rent_schedule; ?></p>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Rent Visit Schedule</strong>
+								<p><?= $visit_rent_schedule; ?></p>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Reject Rent</strong>
+								<p><?= $reject_rent_report; ?></p>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Successful Rent</strong>
+								<p><?= $success_rent_report; ?></p>
+							</div>
+						</a>
+					</div>
+
+					<div class="col-md-3" style="margin-top: 8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Sale Call Schedule</strong>
+								<p><?= $call_sale_schedule; ?></p>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-3" style="margin-top: 8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Sale Visit Schedule</strong>
+								<p><?= $visit_sale_schedule; ?></p>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-3" style="margin-top: 8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Reject Sale</strong>
+								<p><?= $reject_sale_report; ?></p>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-3" style="margin-top: 8px;">
+						<a style="text-decoration: none;" href="">
+							<div class="card">
+								<strong>Successful Sale</strong>
+								<p><?= $success_sale_report; ?></p>
 							</div>
 						</a>
 					</div>
 				</div>
 			</div>
-			<!-- PAGE CONTENT ENDS -->
-		</div><!-- /.col -->
+			<div class="col-md-12 header"></div>
+		</div>
 	</div>
 
 <?php } elseif ($module == 'UserManagement') { ?>
@@ -121,20 +235,6 @@ if ($module == 'dashboard' or $module == '') { ?>
 				<div class="col-md-12 header">
 					<h3> UserManagement </h3>
 				</div>
-				<?php if (array_search("sms", $access) > -1 || (isset($CheckSuperAdmin) || isset($CheckAdmin))) : ?>
-					<div class="col-md-2 col-xs-6 custom-padding ">
-						<div class="col-md-12 section20">
-							<a href="<?php echo base_url(); ?>sms">
-								<div class="logo">
-									<i class="menu-icon fa fa-mobile"></i>
-								</div>
-								<div class="textModule">
-									Send SMS
-								</div>
-							</a>
-						</div>
-					</div>
-				<?php endif; ?>
 				<?php if (array_search("user", $access) > -1 || (isset($CheckSuperAdmin) || isset($CheckAdmin))) : ?>
 					<div class="col-md-2 col-xs-6 custom-padding ">
 						<div class="col-md-12 section20">
@@ -172,20 +272,6 @@ if ($module == 'dashboard' or $module == '') { ?>
 								</div>
 								<div class="textModule">
 									Company Profile
-								</div>
-							</a>
-						</div>
-					</div>
-				<?php endif; ?>
-				<?php if (isset($CheckSuperAdmin)) : ?>
-					<div class="col-md-2 col-xs-6 custom-padding ">
-						<div class="col-md-12 section20">
-							<a href="<?php echo base_url(); ?>database_backup">
-								<div class="logo">
-									<i class="menu-icon fa fa-database"></i>
-								</div>
-								<div class="textModule">
-									Database Backup
 								</div>
 							</a>
 						</div>
@@ -281,7 +367,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 									<i class="menu-icon fa fa-plus-square-o"></i>
 								</div>
 								<div class="textModule">
-									Property Entry
+									Rent Property Entry
 								</div>
 							</a>
 						</div>
@@ -296,36 +382,36 @@ if ($module == 'dashboard' or $module == '') { ?>
 									<i class="menu-icon fa fa-list"></i>
 								</div>
 								<div class="textModule">
-									Property List
+									Rent Property List
+								</div>
+							</a>
+						</div>
+					</div>
+				<?php endif; ?>
+				<?php if (array_search("sale_property", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+					<div class="col-md-2 col-xs-6 custom-padding ">
+						<div class="col-md-12 section20">
+							<a href="<?php echo base_url(); ?>sale_property">
+								<div class="logo">
+									<i class="menu-icon fa fa-plus-square-o"></i>
+								</div>
+								<div class="textModule">
+									Sale Property Entry
 								</div>
 							</a>
 						</div>
 					</div>
 				<?php endif; ?>
 
-				<?php if (array_search("floor", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+				<?php if (array_search("sale_property_list", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
 					<div class="col-md-2 col-xs-6 custom-padding ">
 						<div class="col-md-12 section20">
-							<a href="<?php echo base_url(); ?>floor">
+							<a href="<?php echo base_url(); ?>sale_property_list">
 								<div class="logo">
-									<i class="menu-icon fa fa-building-o"></i>
+									<i class="menu-icon fa fa-list"></i>
 								</div>
 								<div class="textModule">
-									Floor Entry
-								</div>
-							</a>
-						</div>
-					</div>
-				<?php endif; ?>
-				<?php if (array_search("property_category", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
-					<div class="col-md-2 col-xs-6 custom-padding ">
-						<div class="col-md-12 section20">
-							<a href="<?php echo base_url(); ?>property_category">
-								<div class="logo">
-									<i class="menu-icon fa fa-plus-square"></i>
-								</div>
-								<div class="textModule">
-									Category Entry
+									Sale Property List
 								</div>
 							</a>
 						</div>

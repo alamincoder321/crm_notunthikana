@@ -146,7 +146,7 @@ class SaleCustomer extends CI_Controller
             } else {
                 $customer["AddBy"] = $this->session->userdata("FullName");
                 $customer["AddTime"] = date("Y-m-d H:i:s");
-                $customer["status"] = 'a';
+                $customer["status"] = 'p';
 
                 $this->db->insert('tbl_sale_customer', $customer);
                 $res_message = 'Sale Lead added successfully';
@@ -174,7 +174,7 @@ class SaleCustomer extends CI_Controller
                 'Customer_Name',
                 'Customer_Mobile'
             );
-            
+
             $customerId = $customerObj->Customer_SlNo;
             unset($customerObj->Customer_SlNo);
             foreach ($customerObj as $key => $val) {

@@ -20,7 +20,7 @@ class PropertyCategory extends CI_Controller
         }
 
         $data['title'] = "Property Category Entry";
-        $data['content'] = $this->load->view('Administrator/property/add_property_category', $data, TRUE);
+        $data['content'] = $this->load->view('Administrator/common/add_property_category', $data, TRUE);
         $this->load->view('Administrator/index', $data);
     }
 

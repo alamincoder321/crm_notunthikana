@@ -80,6 +80,15 @@
                             <td>{{ row.AddBy }}</td>
                             <td>{{ row.User_Name }}</td>
                             <td>
+                                <span v-show="row.Status == 'p'" class="badge badge-danger">Pending</span>
+                                <span v-show="row.Status == 'a'" class="badge badge-success">Approved</span>
+                            </td>
+                            <td>
+                                <a href="" :href="`/rent_report/${row.Customer_SlNo}`" class="button edit">
+                                    <i class="fa fa-commenting-o" style="font-size: 25px;"></i>
+                                </a>
+                            </td>
+                            <td>
                                 <?php if ($this->session->userdata('accountType') != 'u') { ?>
                                     <button type="button" @click="showModal(row)">Assign</button>
                                     <a href="" :href="`/customer/${row.Customer_SlNo}`" class="button edit">
@@ -256,6 +265,16 @@
                     {
                         label: 'Assign_By',
                         field: 'User_Name',
+                        align: 'center'
+                    },
+                    {
+                        label: 'Status',
+                        field: 'status',
+                        align: 'center'
+                    },
+                    {
+                        label: 'Message_Entry',
+                        field: 'report',
                         align: 'center'
                     },
                     {

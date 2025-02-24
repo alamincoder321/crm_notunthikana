@@ -38,6 +38,18 @@ $route['assign_sale_customer'] = 'Administrator/SaleCustomer/assignCustomer';
 $route['delete_sale_customer'] = 'Administrator/SaleCustomer/deleteCustomer';
 $route['get_sale_customers'] = 'Administrator/SaleCustomer/getCustomers';
 
+//report rent
+$route['rent_report/(:any)'] = 'Administrator/Reports/showRentReport/$1';
+$route['add_rent_report'] = 'Administrator/Reports/addRentReport';
+$route['delete_rent_report'] = 'Administrator/Reports/deleteRentReport';
+$route['get_rent_report'] = 'Administrator/Reports/getRentReport';
+
+//report sale
+$route['sale_report/(:any)'] = 'Administrator/Reports/showSaleReport/$1';
+$route['add_sale_report'] = 'Administrator/Reports/addSaleReport';
+$route['delete_sale_report'] = 'Administrator/Reports/deleteSaleReport';
+$route['get_sale_report'] = 'Administrator/Reports/getSaleReport';
+
 //====================================== Common Route ======================================
 // zone route
 $route['zone'] = 'Administrator/Zone';

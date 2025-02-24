@@ -43,22 +43,6 @@
 							<div id="type" class="col-md-12"></div>
 						</div>
 					</div>
-					<?php
-					$employees = $this->db->query("select * from tbl_employee where status = 'a'")->result();
-					?>
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="employeeId"> Hunter </label>
-						<label class="col-md-1 control-label">:</label>
-						<div class="col-md-6">
-							<select style="padding:0px 2px;" class="form-control" name="employeeId" id="employeeId">
-								<option value="">Select Hunter</option>
-								<?php foreach ($employees as $item) { ?>
-									<option value="<?= $item->Employee_SlNo; ?>"><?= $item->Employee_Name; ?></option>
-								<?php } ?>
-							</select>
-							<div id="employeeId" class="col-md-12"></div>
-						</div>
-					</div>
 				</div>
 
 				<div class="col-md-6">
@@ -146,7 +130,6 @@
 							<th>User Email</th>
 							<th>Type</th>
 							<th>Status</th>
-							<th>Under Leading</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -169,11 +152,9 @@
 													u.UserType,
 													u.status AS userstatus,
 													br.brunch_id,
-													br.Brunch_name,
-													au.User_Name as underLeading
+													br.Brunch_name
 												FROM tbl_user u
 												LEFT JOIN tbl_brunch br ON br.brunch_id = u.userBrunch_id
-												INNER JOIN tbl_user au ON au.User_SlNo = u.userId 
 												WHERE 1 = 1 $clauses");
 						$results = $query->result();
 						foreach ($results as $key => $row) {
@@ -214,9 +195,6 @@
 										</span>
 									<?php } ?>
 								</td>
-
-								<td><?php echo $row->underLeading; ?></td>
-
 
 								<td>
 									<div class="hidden-md hidden-xs action-buttons">
@@ -333,13 +311,6 @@
 				$.fancybox.close();
 			}, 1200);
 		}
-		// var Brunch= $("#Brunch").val();
-		// if(Brunch==""){
-		//     $("#Brunch").css("border-color","red");
-		//     return false;
-		// }else{
-		//     $("#Brunch").css("border-color","green");
-		// }
 		var type = $("#type").val();
 		if (type == "") {
 			$("#type").css("border-color", "red");
@@ -348,16 +319,7 @@
 			$("#type").css("border-color", "green");
 		}
 
-		var employeeId = $("#employeeId").val();
-		if (employeeId == "") {
-			$("#employeeId").css("border-color", "red");
-			// return false;
-		} else {
-			$("#employeeId").css("border-color", "green");
-		}
-
-
-		var inputdata = 'employeeId=' + employeeId + '&username=' + username + '&rePassword=' + rePassword + '&txtFirstName=' + txtFirstName + '&user_email=' + user_email + '&Brunch=' + 1 + '&type=' + type;
+		var inputdata = 'username=' + username + '&rePassword=' + rePassword + '&txtFirstName=' + txtFirstName + '&user_email=' + user_email + '&Brunch=' + 1 + '&type=' + type;
 		var urldata = "<?php echo base_url(); ?>userInsert";
 		$.ajax({
 			type: "POST",

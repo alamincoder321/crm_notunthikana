@@ -68,14 +68,6 @@ if ($module == 'dashboard' or $module == '') {
 			</li>
 		<?php endif; ?>
 
-		<li class="">
-			<a href="<?php echo base_url(); ?>graph">
-				<i class="menu-icon fa fa-bar-chart"></i>
-				<span class="menu-text"> Business View </span>
-			</a>
-			<b class="arrow"></b>
-		</li>
-
 	</ul>
 <?php } elseif ($module == 'UserManagement') { ?>
 	<ul class="nav nav-list">
@@ -92,13 +84,23 @@ if ($module == 'dashboard' or $module == '') {
 			</a>
 		</li>
 
-		<?php if (array_search("sms", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+		<?php if (array_search("user", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
 			<li class="">
-				<a href="<?php echo base_url(); ?>sms">
-					<i class="menu-icon fa fa-mobile"></i>
-					<span class="menu-text"> Send SMS </span>
+				<a href="<?php echo base_url(); ?>user">
+					<i class="menu-icon fa fa-user-plus"></i>
+					<span class="menu-text"> User Entry </span>
 				</a>
-				<b class="arrow"></b>
+			</li>
+		<?php endif; ?>
+
+
+
+		<?php if (array_search("user_activity", $access) > -1 || isset($CheckSuperAdmin) && $this->session->userdata('BRANCHid') == 1) : ?>
+			<li class="">
+				<a href="<?php echo base_url(); ?>user_activity">
+					<i class="menu-icon fa fa-list"></i>
+					<span class="menu-text"> User Activity</span>
+				</a>
 			</li>
 		<?php endif; ?>
 
@@ -112,43 +114,7 @@ if ($module == 'dashboard' or $module == '') {
 			</li>
 		<?php endif; ?>
 
-		<?php if (array_search("user", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
-			<li class="">
-				<a href="<?php echo base_url(); ?>user">
-					<i class="menu-icon fa fa-user-plus"></i>
-					<span class="menu-text"> User Entry </span>
-				</a>
-			</li>
-		<?php endif; ?>
-
-		<?php if (isset($CheckSuperAdmin)) : ?>
-			<li class="">
-				<a href="<?php echo base_url(); ?>otp_page">
-					<i class="menu-icon fa fa-unlock-alt"></i>
-					<span class="menu-text"> User OTP </span>
-				</a>
-			</li>
-		<?php endif; ?>
-
-		<?php if (array_search("user_activity", $access) > -1 || isset($CheckSuperAdmin) && $this->session->userdata('BRANCHid') == 1) : ?>
-			<li class="">
-				<a href="<?php echo base_url(); ?>user_activity">
-					<i class="menu-icon fa fa-list"></i>
-					<span class="menu-text"> User Activity</span>
-				</a>
-			</li>
-		<?php endif; ?>
-
-		<?php if (array_search("database_backup", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
-			<li class="">
-				<a href="<?php echo base_url(); ?>database_backup">
-					<i class="menu-icon fa fa-database"></i>
-					<span class="menu-text"> Database Backup </span>
-				</a>
-			</li>
-		<?php endif; ?>
-
-	</ul><!-- /.nav-list -->
+	</ul>
 
 <?php } elseif ($module == 'ClientManagement') { ?>
 	<ul class="nav nav-list">
@@ -229,7 +195,7 @@ if ($module == 'dashboard' or $module == '') {
 			<li class="">
 				<a href="<?php echo base_url(); ?>property_entry">
 					<i class="menu-icon fa fa-plus-square-o"></i>
-					<span class="menu-text"> Rent Property </span>
+					<span class="menu-text"> Rent Property Entry </span>
 				</a>
 				<b class="arrow"></b>
 			</li>
@@ -248,7 +214,7 @@ if ($module == 'dashboard' or $module == '') {
 			<li class="">
 				<a href="<?php echo base_url(); ?>sale_property">
 					<i class="menu-icon fa fa-plus-square-o"></i>
-					<span class="menu-text"> Sale Property </span>
+					<span class="menu-text"> Sale Property Entry </span>
 				</a>
 				<b class="arrow"></b>
 			</li>
