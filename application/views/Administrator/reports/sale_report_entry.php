@@ -78,7 +78,7 @@
                             <div class="form-group">
                                 <label class="col-xs-4" for="follow_up">Status:</label>
                                 <div class="col-xs-8">
-                                    <select class="form-control" v-model="message.Status" style="padding: 0 3px; border-radius: 3px;">
+                                    <select class="form-control" v-model="message.report_status" style="padding: 0 3px; border-radius: 3px;">
                                         <option value=""></option>
                                         <option value="a">Successful</option>
                                         <option value="j">Junk/Reject</option>
@@ -123,7 +123,7 @@
                             <div class="form-group">
                                 <label class="col-xs-4" for="follow_up">Status:</label>
                                 <div class="col-xs-8">
-                                    <select class="form-control" v-model="message.Status" style="padding: 0 3px; border-radius: 3px;">
+                                    <select class="form-control" v-model="message.report_status" style="padding: 0 3px; border-radius: 3px;">
                                         <option value=""></option>
                                         <option value="a">Successful</option>
                                         <option value="j">Junk/Reject</option>
@@ -168,7 +168,7 @@
                             <div class="form-group">
                                 <label class="col-xs-4" for="follow_up">Status:</label>
                                 <div class="col-xs-8">
-                                    <select class="form-control" v-model="message.Status" style="padding: 0 3px; border-radius: 3px;">
+                                    <select class="form-control" v-model="message.report_status" style="padding: 0 3px; border-radius: 3px;">
                                         <option value=""></option>
                                         <option value="a">Successful</option>
                                         <option value="j">Junk/Reject</option>
@@ -214,8 +214,8 @@
                                 {{row.call_schedule | dateFormat("DD-MM-YYYY h:mm:ss")}}
                             </td>
                             <td>
-                                <span class="badge badge-success" v-show="row.Status == 'a'">Successful</span>
-                                <span class="badge badge-danger" v-show="row.Status == 'j'">Junk</span>
+                                <span class="badge badge-success" v-show="row.report_status == 'a'">Successful</span>
+                                <span class="badge badge-danger" v-show="row.report_status == 'j'">Junk</span>
                             </td>
                             <td>
                                 <?php if ($this->session->userdata('accountType') == 'm' || $this->session->userdata('accountType') == 'a') { ?>
@@ -277,7 +277,7 @@
                     },
                     {
                         label: 'Status',
-                        field: 'Status',
+                        field: 'report_status',
                         align: 'center'
                     },
                     {
@@ -297,7 +297,7 @@
                     product_match: "",
                     visit_schedule: "",
                     call_schedule: "",
-                    Status: "",
+                    report_status: "",
                     stage: 1
                 },
                 reports: [],
@@ -401,7 +401,7 @@
                 this.message.product_match = "";
                 this.message.visit_schedule = "";
                 this.message.call_schedule = "";
-                this.message.Status = "";
+                this.message.report_status = "";
             },
         }
     })

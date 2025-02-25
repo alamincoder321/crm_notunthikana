@@ -44,6 +44,15 @@
                     <li><input type="checkbox" class="access" value="sale_customerList" v-model="access"> Sale Client List</li>
                     <li><input type="checkbox" class="access" value="pending_sale_customerList" v-model="access"> Pending Sale Client List</li>
                     <li><input type="checkbox" class="access" value="active_sale_customerList" v-model="access"> Active Sale Client List</li>
+                    
+                    <li><input type="checkbox" class="access" value="call_rent_report_list" v-model="access"> Rent Call Report List</li>
+                    <li><input type="checkbox" class="access" value="visit_rent_report_list" v-model="access"> Rent Visit Report List</li>
+                    <li><input type="checkbox" class="access" value="reject_rent_report_list" v-model="access"> Rent Reject Report List</li>
+                    <li><input type="checkbox" class="access" value="success_rent_report_list" v-model="access"> Rent Success Report List</li>
+                    <li><input type="checkbox" class="access" value="call_sale_report_list" v-model="access"> Sale Call Report List</li>
+                    <li><input type="checkbox" class="access" value="visit_sale_report_list" v-model="access"> Sale Visit Report List</li>
+                    <li><input type="checkbox" class="access" value="reject_sale_report_list" v-model="access"> Sale Reject Report List</li>
+                    <li><input type="checkbox" class="access" value="success_sale_report_list" v-model="access"> Sale Success Report List</li>
                 </ul>
             </div>
             <div class="group">

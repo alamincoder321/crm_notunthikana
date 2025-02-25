@@ -51,6 +51,13 @@ $route['delete_rent_report'] = 'Administrator/Reports/deleteRentReport';
 $route['get_rent_report'] = 'Administrator/Reports/getRentReport';
 $route['rent_report_list'] = 'Administrator/Reports/rentReportList';
 $route['call_rent_report_list'] = 'Administrator/Reports/callrentReportList';
+$route['visit_rent_report_list'] = 'Administrator/Reports/visitrentReportList';
+$route['reject_rent_report_list'] = 'Administrator/Reports/rejectrentReportList';
+$route['success_rent_report_list'] = 'Administrator/Reports/successrentReportList';
+$route['call_sale_report_list'] = 'Administrator/Reports/callsaleReportList';
+$route['visit_sale_report_list'] = 'Administrator/Reports/visitsaleReportList';
+$route['reject_sale_report_list'] = 'Administrator/Reports/rejectsaleReportList';
+$route['success_sale_report_list'] = 'Administrator/Reports/successsaleReportList';
 
 //report sale
 $route['sale_report/(:any)'] = 'Administrator/Reports/showSaleReport/$1';

@@ -29,6 +29,15 @@ class Reports extends CI_Controller
         if (isset($data->customerId) && $data->customerId != "") {
             $clauses .= " and rrp.customer_id = '$data->customerId'";
         }
+        if (isset($data->report_status) && $data->report_status != "") {
+            $clauses .= " and rrp.report_status = '$data->report_status'";
+        }
+        if (isset($data->call_schedule_status) && $data->call_schedule_status != "") {
+            $clauses .= " and rrp.call_schedule is not null";
+        }
+        if (isset($data->visit_schedule_status) && $data->visit_schedule_status != "") {
+            $clauses .= " and rrp.visit_schedule is not null";
+        }
         $query = $this->db
             ->query("select rrp.*,
                 c.Customer_Name 
@@ -103,10 +112,23 @@ class Reports extends CI_Controller
         $data = json_decode($this->input->raw_input_stream);
         $clauses = "";
         if (isset($data->customerId) && $data->customerId != "") {
-            $clauses .= " and rrp.customer_id = '$data->customerId'";
+            $clauses .= " and srp.customer_id = '$data->customerId'";
+        }
+        if (isset($data->report_status) && $data->report_status != "") {
+            $clauses .= " and srp.report_status = '$data->report_status'";
+        }
+        if (isset($data->call_schedule_status) && $data->call_schedule_status != "") {
+            $clauses .= " and srp.call_schedule is not null";
+        }
+        if (isset($data->visit_schedule_status) && $data->visit_schedule_status != "") {
+            $clauses .= " and srp.visit_schedule is not null";
         }
         $query = $this->db
-            ->query("select rrp.* from tbl_sale_report rrp where rrp.Status != 'd' $clauses")
+            ->query("select srp.*,
+                c.Customer_Name 
+                from tbl_sale_report srp
+                left join tbl_sale_customer c on c.Customer_SlNo = srp.customer_id 
+                where srp.Status != 'd' $clauses")
             ->result();
 
         echo json_encode($query);
@@ -131,9 +153,9 @@ class Reports extends CI_Controller
             $report["AddTime"] = date("Y-m-d H:i:s");
             $report["branchId"] = $this->session->userdata("BRANCHid");
 
-            $this->db->insert("tbl_sale_report", $report);
+            $this->db->insert("tbl_rent_report", $report);
 
-            // update sale customer
+            // update rent customer
             $this->db->where('Customer_SlNo', $data->customer_id)->update('tbl_sale_customer', ['status' => 'a']);
 
             $res = ['status' => true, 'message' => 'Follow up message added successfully'];
@@ -177,9 +199,79 @@ class Reports extends CI_Controller
         if (!$access) {
             redirect(base_url());
         }
-        $data['title'] = "Rent Report List";
-        $data['status'] = '';
-        $data['content'] = $this->load->view("Administrator/reports/rent_report_list", $data, true);
+        $data['title'] = "Rent Call Schedule Report List";
+        $data['content'] = $this->load->view("Administrator/reports/rent_call_schedule_report", $data, true);
+        $this->load->view("Administrator/index", $data);
+    }
+    public function visitrentReportList()
+    {
+        $access = $this->mt->userAccess();
+        if (!$access) {
+            redirect(base_url());
+        }
+        $data['title'] = "Rent Visit Schedule Report List";
+        $data['content'] = $this->load->view("Administrator/reports/rent_visit_schedule_report", $data, true);
+        $this->load->view("Administrator/index", $data);
+    }
+    public function successrentReportList()
+    {
+        $access = $this->mt->userAccess();
+        if (!$access) {
+            redirect(base_url());
+        }
+        $data['title'] = "Rent Success Report List";
+        $data['content'] = $this->load->view("Administrator/reports/rent_success_report", $data, true);
+        $this->load->view("Administrator/index", $data);
+    }
+    public function rejectrentReportList()
+    {
+        $access = $this->mt->userAccess();
+        if (!$access) {
+            redirect(base_url());
+        }
+        $data['title'] = "Rent Reject Report List";
+        $data['content'] = $this->load->view("Administrator/reports/rent_reject_report", $data, true);
+        $this->load->view("Administrator/index", $data);
+    }
+
+    public function callsaleReportList()
+    {
+        $access = $this->mt->userAccess();
+        if (!$access) {
+            redirect(base_url());
+        }
+        $data['title'] = "Sale Call Schedule Report List";
+        $data['content'] = $this->load->view("Administrator/reports/sale_call_schedule_report", $data, true);
+        $this->load->view("Administrator/index", $data);
+    }
+    public function visitsaleReportList()
+    {
+        $access = $this->mt->userAccess();
+        if (!$access) {
+            redirect(base_url());
+        }
+        $data['title'] = "Sale Visit Schedule Report List";
+        $data['content'] = $this->load->view("Administrator/reports/sale_visit_schedule_report", $data, true);
+        $this->load->view("Administrator/index", $data);
+    }
+    public function successsaleReportList()
+    {
+        $access = $this->mt->userAccess();
+        if (!$access) {
+            redirect(base_url());
+        }
+        $data['title'] = "Sale Success Report List";
+        $data['content'] = $this->load->view("Administrator/reports/sale_success_report", $data, true);
+        $this->load->view("Administrator/index", $data);
+    }
+    public function rejectsaleReportList()
+    {
+        $access = $this->mt->userAccess();
+        if (!$access) {
+            redirect(base_url());
+        }
+        $data['title'] = "Sale Reject Report List";
+        $data['content'] = $this->load->view("Administrator/reports/sale_reject_report", $data, true);
         $this->load->view("Administrator/index", $data);
     }
 }

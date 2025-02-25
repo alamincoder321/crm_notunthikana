@@ -158,7 +158,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 
 					<!-- report section -->
 					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/call_rent_report_list">
 							<div class="card">
 								<strong>Rent Call Schedule</strong>
 								<p><?= $call_rent_schedule; ?></p>
@@ -166,7 +166,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/visit_rent_report_list">
 							<div class="card">
 								<strong>Rent Visit Schedule</strong>
 								<p><?= $visit_rent_schedule; ?></p>
@@ -174,7 +174,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/reject_rent_report_list">
 							<div class="card">
 								<strong>Reject Rent</strong>
 								<p><?= $reject_rent_report; ?></p>
@@ -182,7 +182,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3" style="margin-top: 8px;margin-bottom:8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/success_rent_report_list">
 							<div class="card">
 								<strong>Successful Rent</strong>
 								<p><?= $success_rent_report; ?></p>
@@ -191,7 +191,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 					</div>
 
 					<div class="col-md-3" style="margin-top: 8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/call_sale_report_list">
 							<div class="card">
 								<strong>Sale Call Schedule</strong>
 								<p><?= $call_sale_schedule; ?></p>
@@ -199,7 +199,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3" style="margin-top: 8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/visit_sale_report_list">
 							<div class="card">
 								<strong>Sale Visit Schedule</strong>
 								<p><?= $visit_sale_schedule; ?></p>
@@ -207,7 +207,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3" style="margin-top: 8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/reject_sale_report_list">
 							<div class="card">
 								<strong>Reject Sale</strong>
 								<p><?= $reject_sale_report; ?></p>
@@ -215,7 +215,7 @@ if ($module == 'dashboard' or $module == '') { ?>
 						</a>
 					</div>
 					<div class="col-md-3" style="margin-top: 8px;">
-						<a style="text-decoration: none;" href="">
+						<a style="text-decoration: none;" href="/success_sale_report_list">
 							<div class="card">
 								<strong>Successful Sale</strong>
 								<p><?= $success_sale_report; ?></p>
