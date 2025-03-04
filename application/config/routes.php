@@ -65,6 +65,13 @@ $route['add_sale_report'] = 'Administrator/Reports/addSaleReport';
 $route['delete_sale_report'] = 'Administrator/Reports/deleteSaleReport';
 $route['get_sale_report'] = 'Administrator/Reports/getSaleReport';
 
+// cs_customer route
+$route['cs_customer']        = 'Administrator/CsCustomer';
+$route['add_cs_customer'] = 'Administrator/CsCustomer/addCsCustomer';
+$route['update_cs_customer'] = 'Administrator/CsCustomer/updateCsCustomer';
+$route['delete_cs_customer'] = 'Administrator/CsCustomer/deleteCsCustomer';
+$route['get_cs_customer']    = 'Administrator/CsCustomer/getCsCustomer';
+
 //====================================== Common Route ======================================
 // zone route
 $route['zone'] = 'Administrator/Zone';

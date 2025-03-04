@@ -44,10 +44,10 @@ class SaleCustomer extends CI_Controller
 
     public function customerList($date = '')
     {
-        $access = $this->mt->userAccess();
-        if (!$access) {
-            redirect(base_url());
-        }
+        // $access = $this->mt->userAccess();
+        // if (!$access) {
+        //     redirect(base_url());
+        // }
         $data['title'] = "Sale Lead List";
         $data['date'] = $date;
         $data['status'] = '';

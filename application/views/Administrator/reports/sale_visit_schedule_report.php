@@ -136,6 +136,7 @@
                 clientRow: {},
                 users: [],
                 selectedUser: null,
+                today: moment().format('YYYY-MM-DD'),
                 userType: '<?php echo $this->session->userdata("accountType"); ?>',
                 userId: '<?php echo $this->session->userdata("userId"); ?>',
             }
@@ -153,7 +154,7 @@
                         this.reports = res.data.map((item, index) => {
                             item.sl = index + 1;
                             return item;
-                        });
+                        }).filter(item => moment(item.visit_schedule).format('YYYY-MM-DD') == this.today);
                     })
             },
         }

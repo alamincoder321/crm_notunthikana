@@ -52,28 +52,34 @@ if ($userAccessQuery->num_rows() != 0) {
 
 $companyInfo = $this->db->query("select * from tbl_company c order by c.Company_SlNo desc limit 1")->row();
 
+$leadCluses = "";
+if ($this->session->userdata('accountType') == 'e' || $this->session->userdata('accountType') == 'u') {
+	$leadCluses .= " and user_id = '$userID'";
+}
 
 
-$today_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status != 'd' and DATE_FORMAT(AddTime, '%Y-%m-%d') = ?", [date('Y-m-d')])->row()->count;
-$total_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status != 'd'")->row()->count;
-$today_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status != 'd' and DATE_FORMAT(AddTime, '%Y-%m-%d') = ?", [date('Y-m-d')])->row()->count;
-$total_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status != 'd'")->row()->count;
+$today_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status != 'd' and DATE_FORMAT(AddTime, '%Y-%m-%d') = ? $leadCluses", [date('Y-m-d')])->row()->count;
+$total_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status != 'd' $leadCluses")->row()->count;
+$today_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status != 'd' and DATE_FORMAT(AddTime, '%Y-%m-%d') = ? $leadCluses", [date('Y-m-d')])->row()->count;
+$total_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status != 'd' $leadCluses")->row()->count;
 
-$pending_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status = 'p'")->row()->count;
-$active_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status = 'a'")->row()->count;
-$pending_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status = 'p'")->row()->count;
-$active_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status = 'a'")->row()->count;
+$pending_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status = 'p' $leadCluses")->row()->count;
+$active_rent_lead = $this->db->query("select count(*) as count from tbl_customer where status = 'a' $leadCluses")->row()->count;
+$pending_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status = 'p' $leadCluses")->row()->count;
+$active_sale_lead = $this->db->query("select count(*) as count from tbl_sale_customer where status = 'a' $leadCluses")->row()->count;
 
+$visit_schedule = date('Y-m-d');
+$call_schedule = date('Y-m-d');
 //rent
-$call_rent_schedule = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and call_schedule is not null")->row()->count;
-$visit_rent_schedule = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and visit_schedule is not null")->row()->count;
-$reject_rent_report = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and report_status = 'j'")->row()->count;
-$success_rent_report = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and report_status = 'a'")->row()->count;
+$call_rent_schedule = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and call_schedule is not null and DATE_FORMAT(call_schedule, '%Y-%m-%d') = '$call_schedule' $leadCluses")->row()->count;
+$visit_rent_schedule = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and visit_schedule is not null and DATE_FORMAT(visit_schedule, '%Y-%m-%d') = '$visit_schedule' $leadCluses")->row()->count;
+$reject_rent_report = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and report_status = 'j' $leadCluses")->row()->count;
+$success_rent_report = $this->db->query("select count(*) as count from tbl_rent_report where Status != 'd' and report_status = 'a' $leadCluses")->row()->count;
 //sale
-$call_sale_schedule = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and call_schedule is not null")->row()->count;
-$visit_sale_schedule = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and visit_schedule is not null")->row()->count;
-$reject_sale_report = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and report_status = 'j'")->row()->count;
-$success_sale_report = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and report_status = 'a'")->row()->count;
+$call_sale_schedule = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and call_schedule is not null and DATE_FORMAT(call_schedule, '%Y-%m-%d') = '$call_schedule' $leadCluses")->row()->count;
+$visit_sale_schedule = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and visit_schedule is not null and DATE_FORMAT(visit_schedule, '%Y-%m-%d') = '$visit_schedule' $leadCluses")->row()->count;
+$reject_sale_report = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and report_status = 'j' $leadCluses")->row()->count;
+$success_sale_report = $this->db->query("select count(*) as count from tbl_sale_report where Status != 'd' and report_status = 'a' $leadCluses")->row()->count;
 
 
 

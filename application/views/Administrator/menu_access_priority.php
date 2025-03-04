@@ -118,6 +118,7 @@
             <div class="group">
                 <input type="checkbox" id="accountsReports" class="group-head" @click="onClickGroupHeads"> <strong>User Management</strong>
                 <ul ref="accountsReports">
+                    <li><input type="checkbox" class="access" value="cs_customer" v-model="access"> CS Entry</li>
                     <li><input type="checkbox" class="access" value="user" v-model="access"> User</li>
                     <li><input type="checkbox" class="access" value="user_activity" v-model="access"> User Activity</li>
                     <li><input type="checkbox" class="access" value="companyProfile" v-model="access"> companyProfile </li>

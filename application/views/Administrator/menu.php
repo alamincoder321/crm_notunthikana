@@ -67,6 +67,16 @@ if ($module == 'dashboard' or $module == '') {
 				<b class="arrow"></b>
 			</li>
 		<?php endif; ?>
+		
+		<?php if (array_search("cs_customer", $access) > -1 || isset($CheckSuperAdmin) || isset($CheckAdmin)) : ?>
+			<li class="">
+				<a href="<?php echo base_url(); ?>cs_customer">
+					<i class="menu-icon fa fa-user"></i>
+					<span class="menu-text"> CS Entry </span>
+				</a>
+				<b class="arrow"></b>
+			</li>
+		<?php endif; ?>
 
 	</ul>
 <?php } elseif ($module == 'UserManagement') { ?>
