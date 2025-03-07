@@ -157,7 +157,9 @@ $BRANCHid = $this->session->userdata('BRANCHid');
 													br.Brunch_name
 												FROM tbl_user u
 												LEFT JOIN tbl_brunch br ON br.brunch_id = u.userBrunch_id
-												WHERE 1 = 1 $clauses");
+												WHERE 1 = 1 
+                                                AND u.User_SlNo != 1
+                                                $clauses");
                         $results = $query->result();
                         foreach ($results as $key => $row) {
                         ?>

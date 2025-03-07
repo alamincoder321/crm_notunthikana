@@ -41,7 +41,7 @@ class User_management extends CI_Controller
             from tbl_user u 
             where u.Brunch_ID = ?
             and u.status = 'a'
-            and u.User_Name != 'forhad'
+            and u.User_SlNo != 1
         ", $this->session->userdata('BRANCHid'))->result();
 
         echo json_encode($users);
