@@ -354,7 +354,7 @@
                 axios.post('/assign_customer', filter)
                     .then(res => {
                         alert(res.data.message);
-                        this.getCustomers();
+                        this.getCustomer();
                         $(".myModal").modal("hide");
                     })
             },

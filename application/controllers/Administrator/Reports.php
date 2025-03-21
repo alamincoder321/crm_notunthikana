@@ -111,6 +111,10 @@ class Reports extends CI_Controller
     {
         $data = json_decode($this->input->raw_input_stream);
         $clauses = "";
+        if($this->session->userdata('accountType') == 'u' || $this->session->userdata('accountType') == 'e'){
+            $userId = $this->session->userdata('userId');
+            $clauses .= " and srp.user_id = '$userId'";
+        }
         if (isset($data->customerId) && $data->customerId != "") {
             $clauses .= " and srp.customer_id = '$data->customerId'";
         }
@@ -123,6 +127,7 @@ class Reports extends CI_Controller
         if (isset($data->visit_schedule_status) && $data->visit_schedule_status != "") {
             $clauses .= " and srp.visit_schedule is not null";
         }
+        
         $query = $this->db
             ->query("select srp.*,
                 c.Customer_Name 
@@ -153,7 +158,7 @@ class Reports extends CI_Controller
             $report["AddTime"] = date("Y-m-d H:i:s");
             $report["branchId"] = $this->session->userdata("BRANCHid");
 
-            $this->db->insert("tbl_rent_report", $report);
+            $this->db->insert("tbl_sale_report", $report);
 
             // update rent customer
             $this->db->where('Customer_SlNo', $data->customer_id)->update('tbl_sale_customer', ['status' => 'a']);

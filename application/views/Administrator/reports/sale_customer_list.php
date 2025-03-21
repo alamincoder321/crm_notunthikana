@@ -330,7 +330,7 @@
                 axios.post('/assign_sale_customer', filter)
                     .then(res => {
                         alert(res.data.message);
-                        this.getCustomers();
+                        this.getCustomer();
                         $(".myModal").modal("hide");
                     })
             },
